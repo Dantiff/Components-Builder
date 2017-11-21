@@ -56,16 +56,7 @@
         options,
       };
     },
-    methods: {
-      updateCredits() {
-        const chart = this.$refs.multilinear.chart;
-        chart.credits.update({
-          style: {
-            color: '#' + (Math.random() * 0xffffff || 0).toString(16),
-          },
-        });
-      },
-    },
+    methods: {},
   };
 </script>
 
@@ -75,7 +66,6 @@
       <v-slide-y-transition mode="out-in">
         <v-layout column align-left class="container"> 
           <highcharts :options="options" ref="multilinear"></highcharts>
-          <button @click="updateCredits">update credits</button>
         </v-layout>
       </v-slide-y-transition>
     </v-container>
