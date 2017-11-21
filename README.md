@@ -52,8 +52,8 @@ import Highcharts from 'highcharts';
   }
 ```
 ##### Example
-Sample code for a complete component with sample data is given as:
-###### [highchartsTimeSeriesChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/timeSeriesChart.vue)
+Sample code for a complete component with sample data is given at
+**_[highchartsTimeSeriesChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/timeSeriesChart.vue)_**
 
 
 ## Build Setup
