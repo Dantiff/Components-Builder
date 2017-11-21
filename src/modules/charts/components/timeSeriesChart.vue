@@ -188,6 +188,8 @@
         },
         tooltip: {
           valueSuffix: '',
+          // split: true,
+          shared: true,
         },
         legend: {
           layout: 'vertical',

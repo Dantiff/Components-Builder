@@ -28,6 +28,7 @@
         },
         tooltip: {
           valueSuffix: '°C',
+          shared: true,
         },
         legend: {
           layout: 'vertical',
