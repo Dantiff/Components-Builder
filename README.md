@@ -4,14 +4,6 @@
 ## Material UI
 In this setup, the app selects __[Vuetify](https://vuetifyjs.com/)__, a popular material component framwork with over __6,500__ tags on github, to illustrate basic/advanced setup and usage of Google's material UI with VueJS.
 
-
-⋅⋅⋅You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
-
-⋅⋅⋅To have a line break without a paragraph, you will need to use two trailing spaces.⋅⋅
-⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
-⋅⋅⋅(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
-
-
 ## Charts
 Since most of the advanced JavaScript chart packages and available tutorials and examples for the same conform to the es5 release of Javascript, this app takes an initiative to illustrate the usage of most popular and advance chart packages including **_chart.js_**, **_highcharts_**, and **_ndv3_** charts using the lastest es6 and es7 releases of JavaScript.
 some of the chart examples covered in the app include:
@@ -19,14 +11,14 @@ some of the chart examples covered in the app include:
 #### * MultiLinear charts 
 
 ##### Example
-⋅⋅⋅Sample code for a complete component with sample data is given at
+Sample code for a complete component with sample data is given at
 **_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
 
 #### * TimeSeries Charts 
-⋅⋅⋅[Highcharts Configuration Syntax](https://www.tutorialspoint.com/highcharts/highcharts_configuration_syntax.htm) provides the configuration required to draw charts and as well provides a sample for drawing time series charts. However, all examples are provided in es5 JavaScript syntax. Below is a result of the same using es6 JS syntax.
+[Highcharts Configuration Syntax](https://www.tutorialspoint.com/highcharts/highcharts_configuration_syntax.htm) provides the configuration required to draw charts and as well provides a sample for drawing time series charts. However, all examples are provided in es5 JavaScript syntax. Below is a result of the same using es6 JS syntax.
 ##### Configuration
 ###### chart
-⋅⋅⋅Configure the chart to make it zoomable. chart.zoomType decides the dimensions by which the user can zoom by dragging the mouse. The possible values for this are x, y or xy.
+Configure the chart to make it zoomable. chart.zoomType decides the dimensions by which the user can zoom by dragging the mouse. The possible values for this are x, y or xy.
 ```
  options: {
      chart: {
@@ -35,7 +27,7 @@ some of the chart examples covered in the app include:
   }
 ```
 ###### plotOptions
-⋅⋅⋅Configure the area of chart using plotOptions.
+Configure the area of chart using plotOptions.
 ```
 import Highcharts from 'highcharts';
 
@@ -64,7 +56,7 @@ import Highcharts from 'highcharts';
   }
 ```
 ##### Example
-⋅⋅⋅Sample code for a complete component with sample data is given at
+Sample code for a complete component with sample data is given at
 **_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
 
 
