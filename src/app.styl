@@ -1,0 +1,58 @@
+/* ============
+ * Main Stylesheet
+ * ============
+ *
+ * Used for the global application styling.
+ *
+ * The stylus CSS-preprocessor is used for this boilerplate.
+ * If you don't want to use Stylus, that's fine!
+ * Replace the stylus directory with the CSS preprocessor you want.
+ * Require the stylesheet in the bootstrap.js file & install the webpack loader.
+ *
+ * It's that easy...
+ *
+ * http://stylus-lang.com/
+ */
+
+@import './../node_modules/vuetify/src/stylus/main'
+
+@require './modules/auth'
+@require './modules/account'
+@require './modules/shared'
+@require './modules/charts'
+
+
+// CSS Variables
+app-green-4 = #1b5e20
+app-green-3 = #2e7d32
+app-green-2 = #388e3c
+app-green-1 = #43a047
+app-green = #4caf50
+
+body
+	background #f3f3f3
+	a
+		color app-green-4 !important
+		li
+			.icon
+				color app-green-4 !important
+			.list-tile-title
+				color app-green-4 !important
+		&:hover
+			color app-green-2 !important
+			li
+				.icon
+					color app-green-2 !important
+				.list-tile-title
+					color app-green-2 !important
+			text-decoration none
+		&:focus
+			text-decoration none
+		&:visited
+			text-decoration none
+			color app-green-3 !important
+			li
+				.icon
+					color app-green-3 !important
+				.list-tile-title
+					color app-green-3 !important
