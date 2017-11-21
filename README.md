@@ -7,7 +7,7 @@ In this setup, the app selects __[Vuetify](https://vuetifyjs.com/)__, a popular 
 ## Charts
 Since most of the advanced JavaScript chart packages and available tutorials and examples for the same conform to the es5 release of Javascript, this app takes an initiative to illustrate the usage of most popular and advance chart packages including **_chart.js_**, **_highcharts_**, and **_ndv3_** charts using the lastest es6 and es7 releases of JavaScript.
 some of the chart examples covered in the app include:
-### [1. HighCharts](https://github.com/weizhenye/vue-highcharts)
+### [1. Highcharts](https://github.com/weizhenye/vue-highcharts)
 #### * MultiLinear charts 
 
 ##### Example
