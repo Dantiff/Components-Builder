@@ -1,5 +1,5 @@
 # Components-Builder
-> An app carrying **_multiple custom-components_** commonly shared within different apps
+> A vuejs app carrying **_multiple custom-components_** commonly shared within different apps
 
 ## Material UI
 In this setup, the app selects __[Vuetify](https://vuetifyjs.com/)__, a popular material component framwork with over __6,500__ tags on github, to illustrate basic/advanced setup and usage of Google's material UI with VueJS.
