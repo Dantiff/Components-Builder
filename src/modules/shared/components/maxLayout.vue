@@ -8,6 +8,7 @@
         fixed: false,
         items: [
           { link: { name: 'charts.index' }, icon: 'bubble_chart', title: 'Chart Components' },
+          { link: { name: 'maps.index' }, icon: 'bubble_chart', title: 'Map Components' },
         ],
         miniVariant: false,
         right: true,

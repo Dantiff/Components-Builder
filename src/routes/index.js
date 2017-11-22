@@ -82,6 +82,24 @@ export default [
     },
   },
 
+  // Maps
+  {
+    path: '/maps',
+    name: 'maps.index',
+    component: require('@/modules/maps/components/index.vue'),
+    meta: {
+      auth: true,
+    },
+  },
+  {
+    path: '/maps/googlemaps',
+    name: 'maps.googlemaps',
+    component: require('@/modules/maps/components/googleMaps.vue'),
+    meta: {
+      auth: true,
+    },
+  },
+
   {
     path: '/',
     redirect: '/home',
