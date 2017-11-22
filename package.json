@@ -1,6 +1,6 @@
 {
-  "name": "vue-material",
-  "description": "A boilerplate for vuejs projects using material-ui Vuetify",
+  "name": "Component Builder",
+  "description": "A vuejs app carrying multiple custom-components commonly shared within different apps",
   "version": "1.0.0",
   "author": "Carl Dantiff <danielmburu674@gmail.com>",
   "private": true,
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dantiff/vuejs-2-boilerplate.git"
+    "url": "git+https://github.com/Dantiff/Components-Builder.git"
   },
   "keywords": [
     "Vue",
@@ -28,9 +28,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Dantiff/vuejs-2-boilerplate/issues"
+    "url": "https://github.com/Dantiff/Components-Builder/issues"
   },
-  "homepage": "https://github.com/Dantiff/vuejs-2-boilerplate#readme",
+  "homepage": "https://github.com/Dantiff/Components-Builder#readme",
   "dependencies": {
     "axios": "^0.16.1",
     "bootstrap": "^3.3.7",
@@ -41,7 +41,7 @@
     "vue-highcharts": "^0.0.10",
     "vue-i18n": "^6.1.1",
     "vue-router": "^2.5.1",
-    "vuetify": "^0.14.7",
+    "vuetify": "^0.17.2",
     "vuex": "^2.3.1",
     "vuex-router-sync": "^4.1.2"
   },
