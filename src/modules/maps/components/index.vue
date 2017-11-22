@@ -3,11 +3,11 @@
   export default {
     data() {
       return {
-        charts: [
+        maps: [
           {
             title: 'Google Maps',
             text: 'A es6-based implementation of google maps',
-            charts: [
+            maps: [
               { link: { name: 'maps.googlemaps' }, title: 'Google Maps' },
             ],
           },
