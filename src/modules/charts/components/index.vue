@@ -28,9 +28,9 @@
 
 <template>
   <v-max-layout>
-    <v-container fluid class="quotes">
-      <v-slide-y-transition mode="out-in">
-        <v-layout column align-left class="container">
+    <v-container>
+      <v-layout row wrap>
+        <v-flex xs12 lg12>
           <v-container>
             <v-layout row wrap>
               <v-flex xs12 lg12>
@@ -69,8 +69,8 @@
               </v-flex>
             </v-layout>
           </v-container>
-        </v-layout>
-      </v-slide-y-transition>
+        </v-flex>
+      </v-layout>
     </v-container>
   </v-max-layout>
 </template>

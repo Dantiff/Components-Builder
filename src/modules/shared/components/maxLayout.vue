@@ -21,11 +21,11 @@
 <template>
   <v-app light>
     <v-navigation-drawer
-      persistent
+      fixed
       :mini-variant="miniVariant"
       :clipped="clipped"
       v-model="drawer"
-
+      app
     >
       <v-list>
         <router-link 
@@ -45,7 +45,7 @@
         </router-link>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed>
+    <v-toolbar app>
       <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-btn 
         icon
@@ -64,22 +64,24 @@
         <v-icon>menu</v-icon>
       </v-btn>
     </v-toolbar>
-    <main>
+    <v-content>
       <v-container fluid>
         <v-slide-y-transition mode="out-in">
-          <v-layout column>
-            
+          <v-layout column align-center>
+
             <!-- Children components fit here -->            
             <slot></slot>
 
           </v-layout>
         </v-slide-y-transition>
       </v-container>
-    </main>
+    </v-content>
     <v-navigation-drawer
       temporary
+      fixed
       :right="right"
       v-model="rightDrawer"
+      app
     >
       <v-list>
         <v-list-tile @click.native="right = !right">
@@ -90,8 +92,9 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-footer :fixed="fixed">
+    <v-footer :fixed="fixed" app>
       <div class="align-center text-xs-center">Carl Dantiff &copy;2017. All Rights Reserved</div>
     </v-footer>
   </v-app>
 </template>
+
