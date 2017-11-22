@@ -5352,6 +5352,10 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-google-autocomplete@^1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/vue-google-autocomplete/-/vue-google-autocomplete-1.0.13.tgz#4c85bab3eaa5f5bc441ee20f41da8f20772bb0c0"
+
 vue-highcharts@^0.0.10:
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/vue-highcharts/-/vue-highcharts-0.0.10.tgz#a4b90098ede77a65cca87e62bed87549e1e1c985"
