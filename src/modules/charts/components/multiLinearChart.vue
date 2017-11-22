@@ -57,7 +57,6 @@
         options,
       };
     },
-    methods: {},
   };
 </script>
 
