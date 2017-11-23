@@ -3,28 +3,38 @@
   export default {
     data() {
       return {
+        markersStore: [],
         markers: [],
+        center: { lat: -1.2920659, lng: 36.82194619999996 },
+        zoom: 7,
         place: null,
+        show: false,
       };
     },
-    description: 'Autocomplete Example (#164)',
+    description: 'Autocomplete Example',
     methods: {
       setDescription(description) {
         this.description = description;
       },
       setPlace(place) {
-        this.place = place;
+        const setData = () => {
+          const p = place.geometry.location;
+          const position = { lat: p.lat(), lng: p.lng() };
+
+          this.center = { ...position };
+          this.markersStore = [...this.markersStore, { position }];
+          this.place = place;
+        };
+
+        const update = async () => {
+          await setData();
+          return this.focus();
+        };
+
+        update();
       },
-      usePlace() {
-        if (this.place) {
-          this.markers.push({
-            position: {
-              lat: this.place.geometry.location.lat(),
-              lng: this.place.geometry.location.lng(),
-            },
-          });
-          this.place = null;
-        }
+      focus() {
+        this.zoom = 15;
       },
     },
   };
@@ -35,20 +45,36 @@
     <v-container>
       <v-layout row wrap>
         <v-flex xs12 lg12>
-          <div>
-            <label>
-              AutoComplete
-              <GmapAutocomplete @place_changed="setPlace">
-              </GmapAutocomplete>
-              <button @click="usePlace">Add</button>
-            </label>
-            <br/>
+          <v-card-text>
+            <GmapMap 
+              style="width: 600px; height: 300px;" 
+              :zoom="zoom" 
+              :center="center"
+              ref="locatorMap"
+            >
+              <v-toolbar
+                color="white"
+                floating
+                dense
+              >
+                <v-tooltip right>
+                  <v-btn 
+                    icon
+                    slot="activator"
+                    @click="show = !show"
+                  >
+                    <v-icon>search</v-icon>
+                  </v-btn>
+                  <span>Click to expand search bar</span>
+                </v-tooltip>
 
-            <GmapMap style="width: 600px; height: 300px;" :zoom="1" :center="{lat: 0, lng: 0}">
-              <GmapMarker v-for="(marker, index) in markers"
-                :key="index"
-                :position="marker.position"
-                />
+                <span v-if="show">
+                  <GmapAutocomplete @place_changed="setPlace"></GmapAutocomplete>
+                  <v-btn icon @click="focus">
+                    <v-icon>my_location</v-icon>
+                  </v-btn>
+                </span>
+              </v-toolbar>
               <GmapMarker
                 v-if="this.place"
                 label="★"
@@ -56,9 +82,19 @@
                   lat: this.place.geometry.location.lat(),
                   lng: this.place.geometry.location.lng(),
                 }"
-                />
+                :clickable="true"
+                @click="focus"
+              />
             </GmapMap>
-          </div>
+          </v-card-text>
+          <v-card-text>
+            <GmapMap style="width: 600px; height: 300px;" :zoom="1" :center="{lat: 0, lng: 0}">
+              <GmapMarker v-for="(m, i) in markersStore"
+                :key="i"
+                :position="m.position"
+              />
+            </GmapMap>
+          </v-card-text>
         </v-flex>
       </v-layout>
     </v-container>
