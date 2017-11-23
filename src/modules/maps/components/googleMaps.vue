@@ -6,7 +6,7 @@
         markersStore: [],
         markers: [],
         center: { lat: -1.2920659, lng: 36.82194619999996 },
-        zoom: 7,
+        zoom: 6,
         place: null,
         show: false,
       };
@@ -34,7 +34,27 @@
         update();
       },
       focus() {
-        this.zoom = 15;
+        this.zoom = 16;
+      },
+      lockUserLocation() {
+        const lock = async () => {
+          navigator.geolocation.getCurrentPosition((p) => {
+            const position = {
+              lat: p.coords.latitude,
+              lng: p.coords.longitude,
+            };
+            this.center = { ...position };
+            this.place = null;
+            this.markers = [{ position }];
+          });
+        };
+
+        const update = async () => {
+          await lock();
+          return this.focus();
+        };
+
+        update();
       },
     },
   };
@@ -70,14 +90,24 @@
 
                 <span v-if="show">
                   <GmapAutocomplete @place_changed="setPlace"></GmapAutocomplete>
-                  <v-btn icon @click="focus">
+                  <v-btn icon @click="lockUserLocation">
                     <v-icon>my_location</v-icon>
                   </v-btn>
                 </span>
               </v-toolbar>
               <GmapMarker
+                v-for="(m, i) in markers"
+                :key="i"
+                label="★"
+                :title="'Gee!! This is the place I am now.'"
+                :position="m.position"
+                :clickable="true"
+                @click="focus"
+              />
+              <GmapMarker
                 v-if="this.place"
                 label="★"
+                :title="'This is the place i\'m gonna visit next.'"
                 :position="{
                   lat: this.place.geometry.location.lat(),
                   lng: this.place.geometry.location.lng(),
