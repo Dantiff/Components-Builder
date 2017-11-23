@@ -55,6 +55,23 @@ import Highcharts from 'highcharts';
     },
   }
 ```
+
+###### Display
+To mount the chart, pass the $options to the options prop of the highcharts component as follows:
+```
+ <highcharts :options="options" ref="timeseries"></highcharts>
+ ```
+
+##### Example
+Sample code for a complete component with sample data is given at
+**_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
+
+
+## Maps
+Among the maps packages covered in the app include **_google maps_**. Detailed discussion on the same is provided as follows:
+### [1. Google Maps](https://developers.google.com/maps/)
+#### * [Google Maps - Vue2-google-maps](https://github.com/xkjyeah/vue-google-maps)
+
 ##### Example
 Sample code for a complete component with sample data is given at
 **_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
