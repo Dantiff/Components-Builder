@@ -33,8 +33,12 @@
 
         update();
       },
-      focus() {
-        this.zoom = 16;
+      focus(increament) {
+        if (increament) {
+          this.zoom = increament ? this.zoom + 1 : this.zoom;
+        } else {
+          this.zoom = 16;
+        }
       },
       lockUserLocation() {
         const lock = async () => {
@@ -102,7 +106,7 @@
                 :title="'Gee!! This is the place I am now.'"
                 :position="m.position"
                 :clickable="true"
-                @click="focus"
+                @click="focus(true)"
               />
               <GmapMarker
                 v-if="this.place"
@@ -113,7 +117,7 @@
                   lng: this.place.geometry.location.lng(),
                 }"
                 :clickable="true"
-                @click="focus"
+                @click="focus(true)"
               />
             </GmapMap>
           </v-card-text>
