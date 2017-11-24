@@ -5,6 +5,7 @@ Table of Contents
 -----------------
 
 [**Material UI**](#material-ui)
+
 [**Charts**](#charts)
 * [**Highcharts**](#highcharts)
   * [**MultiLinear Chart**](#multilinear-highcharts)
@@ -12,8 +13,10 @@ Table of Contents
 * [**ChartJS**](#chartjs)
   * [**Pie Chart**](#pie-chartjs)
   * [**Multilinear Chart**](#multilear-chartjs)
+  
 [**Maps**](#maps)
 * [**Google Maps**](#googlemaps)
+
 [**Develop**](#develop)
 
 
