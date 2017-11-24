@@ -121,7 +121,7 @@ Among the maps packages covered in the app include **_google maps_**. Detailed d
 
 <a name="googlemaps"></a>
 ### [1. Google Maps](https://developers.google.com/maps/)
-#### * [Google Maps - Vue2-google-maps](https://github.com/xkjyeah/vue-google-maps)
+#### * [Google Maps](https://github.com/xkjyeah/vue-google-maps)- (using Vue2-google-maps)
 
 ##### Example
 Sample code for a complete component with sample data is given at
