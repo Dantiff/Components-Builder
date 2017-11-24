@@ -32,65 +32,65 @@ some of the chart examples covered in the app include:
 ### [1. Highcharts](https://github.com/weizhenye/vue-highcharts)
 * Below include a list of highchart charts implemented in the app:
 
-<a name="multilinear-highcharts"></a>
-#### i. MultiLinear charts 
+  <a name="multilinear-highcharts"></a>
+  #### i. MultiLinear charts 
 
-##### Example
-Sample code for a complete component with sample data is given at
-**_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
+  ##### Example
+  Sample code for a complete component with sample data is given at
+  **_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
 
-<a name="timeseries-highcharts"></a>
-#### ii. TimeSeries Charts 
-[Highcharts Configuration Syntax](https://www.tutorialspoint.com/highcharts/highcharts_configuration_syntax.htm) provides the configuration required to draw charts and as well provides a sample for drawing time series charts. However, all examples are provided in es5 JavaScript syntax. Below is a result of the same using es6 JS syntax.
-##### Configuration
-###### chart
-Configure the chart to make it zoomable. chart.zoomType decides the dimensions by which the user can zoom by dragging the mouse. The possible values for this are x, y or xy.
-```
- options: {
-     chart: {
-      zoomType: 'x',
+  <a name="timeseries-highcharts"></a>
+  #### ii. TimeSeries Charts 
+  [Highcharts Configuration Syntax](https://www.tutorialspoint.com/highcharts/highcharts_configuration_syntax.htm) provides the configuration required to draw charts and as well provides a sample for drawing time series charts. However, all examples are provided in es5 JavaScript syntax. Below is a result of the same using es6 JS syntax.
+  ##### Configuration
+  ###### chart
+  Configure the chart to make it zoomable. chart.zoomType decides the dimensions by which the user can zoom by dragging the mouse. The possible values for this are x, y or xy.
+  ```
+   options: {
+       chart: {
+        zoomType: 'x',
+      }
     }
-  }
-```
-###### plotOptions
-Configure the area of chart using plotOptions.
-```
-import Highcharts from 'highcharts';
+  ```
+  ###### plotOptions
+  Configure the area of chart using plotOptions.
+  ```
+  import Highcharts from 'highcharts';
 
- options: {
-    plotOptions: {
-      area: {
-        fillColor: {
-          linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-          stops: [
-            [0, Highcharts.getOptions().colors[0]],
-            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')],
-          ],
-        },
-        marker: {
-          radius: 2,
-        },
-        lineWidth: 1,
-        states: {
-          hover: {
-            lineWidth: 1,
+   options: {
+      plotOptions: {
+        area: {
+          fillColor: {
+            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+            stops: [
+              [0, Highcharts.getOptions().colors[0]],
+              [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')],
+            ],
           },
+          marker: {
+            radius: 2,
+          },
+          lineWidth: 1,
+          states: {
+            hover: {
+              lineWidth: 1,
+            },
+          },
+          threshold: null,
         },
-        threshold: null,
       },
-    },
-  }
-```
+    }
+  ```
 
-###### Display
-To mount the chart, pass the $options to the options prop of the highcharts component as follows:
-```
- <highcharts :options="options" ref="timeseries"></highcharts>
- ```
+  ###### Display
+  To mount the chart, pass the $options to the options prop of the highcharts component as follows:
+  ```
+   <highcharts :options="options" ref="timeseries"></highcharts>
+   ```
 
-##### Example
-Sample code for a complete component with sample data is given at
-**_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
+  ##### Example
+  Sample code for a complete component with sample data is given at
+  **_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
 
 <a name="chartjs"></a>
 ### [2. ChartJS](http://www.chartjs.org/samples/latest/)
