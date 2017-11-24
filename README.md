@@ -30,7 +30,6 @@ some of the chart examples covered in the app include:
 
 <a name="highcharts"></a>
 ### [1. Highcharts](https://github.com/weizhenye/vue-highcharts)
-  
   <a name="multilinear-highcharts"></a>
   #### i. MultiLinear charts 
 
