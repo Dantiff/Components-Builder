@@ -17,7 +17,7 @@ Table of Contents
 [**Maps**](#maps)
 * [**Google Maps**](#googlemaps)
 
-[**Develop**](#develop)
+[**Build Setup**](#build-setup)
 
 
 <a name="material-ui"></a>
@@ -127,7 +127,7 @@ Among the maps packages covered in the app include **_google maps_**. Detailed d
 Sample code for a complete component with sample data is given at
 **_[googleMaps.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/maps/components/googleMaps.vue)_**
 
-
+<a name="#build-setup"></a>
 ## Build Setup
 
 ``` bash
