@@ -30,16 +30,17 @@ some of the chart examples covered in the app include:
 
 <a name="highcharts"></a>
 ### [1. Highcharts](https://github.com/weizhenye/vue-highcharts)
+* Below include a list of highchart charts implemented in the app:
 
 <a name="multilinear-highcharts"></a>
-#### * MultiLinear charts 
+#### i. MultiLinear charts 
 
 ##### Example
 Sample code for a complete component with sample data is given at
 **_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
 
 <a name="timeseries-highcharts"></a>
-#### * TimeSeries Charts 
+#### ii. TimeSeries Charts 
 [Highcharts Configuration Syntax](https://www.tutorialspoint.com/highcharts/highcharts_configuration_syntax.htm) provides the configuration required to draw charts and as well provides a sample for drawing time series charts. However, all examples are provided in es5 JavaScript syntax. Below is a result of the same using es6 JS syntax.
 ##### Configuration
 ###### chart
