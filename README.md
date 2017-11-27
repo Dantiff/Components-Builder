@@ -44,7 +44,7 @@ Since most of the advanced JavaScript chart packages and available tutorials and
 some of the chart examples covered in the app include:
 
 <a name="highcharts"></a>
- 1.  <h3>[Highcharts](https://github.com/weizhenye/vue-highcharts)</h3>
+ 1.  <h3 href="https://github.com/weizhenye/vue-highcharts">Highcharts</h3>
 
       Before you can start using highcarts, there are a number of configurations that must be done and which must be      included in the app's bootstrap file. All configs required in order to use either highcharts, highstock, highmaps, drilldown, solid guage or highcharts more are listed as follows:
       
@@ -69,12 +69,12 @@ some of the chart examples covered in the app include:
       // Now you can use Highstock, Highmaps, drilldown and solid gauge.
       Vue.use(VueHighcharts, { Highcharts });
       ```
-      * <h4> MultiLinear charts </h4>
+      * MultiLinear charts
         ##### Example
         Sample code for a complete component with sample data is given at
         **_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
         
-      * <h4> TimeSeries Charts </h4>
+      * TimeSeries Charts
         [Highcharts Configuration Syntax](https://www.tutorialspoint.com/highcharts/highcharts_configuration_syntax.htm) provides the configuration required to draw charts and as well provides a sample for drawing time series charts. However, all examples are provided in es5 JavaScript syntax. Below is a result of the same using es6 JS syntax.
          ##### Configuration
          ###### chart
