@@ -22,14 +22,28 @@ Table of Contents
 
 <a name="material-ui"></a>
 ## Material UI
-   In this setup, the app selects __[Vuetify](https://vuetifyjs.com/)__, a popular material component framwork with over __6,500__ tags on github, to illustrate basic/advanced setup and usage of Google's material UI with VueJS.
+In this setup, the app selects __[Vuetify](https://vuetifyjs.com/)__, a popular material component framwork with over __6,500__ tags on github, to illustrate basic/advanced setup and usage of Google's material UI with VueJS.
 
+6.  Indent sub-lists by the same amount as the item text;
+    this must be 4-7 spaces more than the symbol or number.
+
+    1.  if enumerated, always start them with 1.
+
+        + (the same rules apply to sub-sub-lists, etcetera)
+
+    Additional non-sub-list paragraphs require the same indentation;
+    example blocks (after double colon ``::``) must be indented at
+    least eight spaces more than the symbol or number, like this::
+
+        * item text::
+
+                code block
 ## Charts
-   Since most of the advanced JavaScript chart packages and available tutorials and examples for the same conform to the es5 release of Javascript, this app takes an initiative to illustrate the usage of most popular and advance chart packages including **_chart.js_**, **_highcharts_**, and **_ndv3_** charts using the lastest es6 and es7 releases of JavaScript.
+Since most of the advanced JavaScript chart packages and available tutorials and examples for the same conform to the es5 release of Javascript, this app takes an initiative to illustrate the usage of most popular and advance chart packages including **_chart.js_**, **_highcharts_**, and **_ndv3_** charts using the lastest es6 and es7 releases of JavaScript.
 some of the chart examples covered in the app include:
 
 <a name="highcharts"></a>
-   ### [1. Highcharts](https://github.com/weizhenye/vue-highcharts)
+### [1. Highcharts](https://github.com/weizhenye/vue-highcharts)
 Before you can start using highcarts, there are a number of configurations that must be done and which must be included in the app's bootstrap file. All configs required in order to use either highcharts, highstock, highmaps, drilldown, solid guage or highcharts more are listed as follows:
 
 ```
