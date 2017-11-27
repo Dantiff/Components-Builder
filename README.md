@@ -45,97 +45,97 @@ some of the chart examples covered in the app include:
 
 <a name="highcharts"></a>
 <h4> 1. [Highcharts](https://github.com/weizhenye/vue-highcharts) </h4>
-        Before you can start using highcarts, there are a number of configurations that must be done and which must be included in the app's bootstrap file. All configs required in order to use either highcharts, highstock, highmaps, drilldown, solid guage or highcharts more are listed as follows:
+   Before you can start using highcarts, there are a number of configurations that must be done and which must be included in the app's bootstrap file. All configs required in order to use either highcharts, highstock, highmaps, drilldown, solid guage or highcharts more are listed as follows:
 
-        ```
-        import VueHighcharts from 'vue-highcharts';
-        import Highcharts from 'highcharts';
+   ```
+   import VueHighcharts from 'vue-highcharts';
+   import Highcharts from 'highcharts';
 
-        // load these modules as your need
-        import loadStock from 'highcharts/modules/stock';
-        import loadMap from 'highcharts/modules/map';
-        import loadDrilldown from 'highcharts/modules/drilldown';
-        // some charts like solid gauge require `highcharts-more.js`, you can find it in official demo.
-        import loadHighchartsMore from 'highcharts/highcharts-more';
-        import loadSolidGauge from 'highcharts/modules/solid-gauge';
+   // load these modules as your need
+   import loadStock from 'highcharts/modules/stock';
+   import loadMap from 'highcharts/modules/map';
+   import loadDrilldown from 'highcharts/modules/drilldown';
+   // some charts like solid gauge require `highcharts-more.js`, you can find it in official demo.
+   import loadHighchartsMore from 'highcharts/highcharts-more';
+   import loadSolidGauge from 'highcharts/modules/solid-gauge';
 
-        loadStock(Highcharts);
-        loadMap(Highcharts);
-        loadDrilldown(Highcharts);
-        loadHighchartsMore(Highcharts);
-        loadSolidGauge(Highcharts);
+   loadStock(Highcharts);
+   loadMap(Highcharts);
+   loadDrilldown(Highcharts);
+   loadHighchartsMore(Highcharts);
+   loadSolidGauge(Highcharts);
 
-        // Now you can use Highstock, Highmaps, drilldown and solid gauge.
-        Vue.use(VueHighcharts, { Highcharts });
-        ```
-        <a name="multilinear-highcharts"></a>
-        #### i. MultiLinear charts 
-         ##### Example
-         Sample code for a complete component with sample data is given at
-         **_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
+   // Now you can use Highstock, Highmaps, drilldown and solid gauge.
+   Vue.use(VueHighcharts, { Highcharts });
+   ```
+   <a name="multilinear-highcharts"></a>
+   #### i. MultiLinear charts 
+    ##### Example
+    Sample code for a complete component with sample data is given at
+    **_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
 
-        <a name="timeseries-highcharts"></a>
-        #### ii. TimeSeries Charts 
-        [Highcharts Configuration Syntax](https://www.tutorialspoint.com/highcharts/highcharts_configuration_syntax.htm) provides the configuration required to draw charts and as well provides a sample for drawing time series charts. However, all examples are provided in es5 JavaScript syntax. Below is a result of the same using es6 JS syntax.
-         ##### Configuration
-         ###### chart
-         Configure the chart to make it zoomable. chart.zoomType decides the dimensions by which the user can zoom by dragging the mouse. The possible values for this are x, y or xy.
-         ```
-          options: {
-              chart: {
-               zoomType: 'x',
-             }
-           }
-         ```
-         ###### plotOptions
-         Configure the area of chart using plotOptions.
-         ```
-         import Highcharts from 'highcharts';
+   <a name="timeseries-highcharts"></a>
+   #### ii. TimeSeries Charts 
+   [Highcharts Configuration Syntax](https://www.tutorialspoint.com/highcharts/highcharts_configuration_syntax.htm) provides the configuration required to draw charts and as well provides a sample for drawing time series charts. However, all examples are provided in es5 JavaScript syntax. Below is a result of the same using es6 JS syntax.
+    ##### Configuration
+    ###### chart
+    Configure the chart to make it zoomable. chart.zoomType decides the dimensions by which the user can zoom by dragging the mouse. The possible values for this are x, y or xy.
+    ```
+     options: {
+         chart: {
+          zoomType: 'x',
+        }
+      }
+    ```
+    ###### plotOptions
+    Configure the area of chart using plotOptions.
+    ```
+    import Highcharts from 'highcharts';
 
-          options: {
-             plotOptions: {
-               area: {
-                 fillColor: {
-                   linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-                   stops: [
-                     [0, Highcharts.getOptions().colors[0]],
-                     [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')],
-                   ],
-                 },
-                 marker: {
-                   radius: 2,
-                 },
-                 lineWidth: 1,
-                 states: {
-                   hover: {
-                     lineWidth: 1,
-                   },
-                 },
-                 threshold: null,
-               },
-             },
-           }
-         ```
+     options: {
+        plotOptions: {
+          area: {
+            fillColor: {
+              linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+              stops: [
+                [0, Highcharts.getOptions().colors[0]],
+                [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')],
+              ],
+            },
+            marker: {
+              radius: 2,
+            },
+            lineWidth: 1,
+            states: {
+              hover: {
+                lineWidth: 1,
+              },
+            },
+            threshold: null,
+          },
+        },
+      }
+    ```
 
-         ###### Display
-         To mount the chart, pass the $options to the options prop of the highcharts component as follows:
-         ```
-          <highcharts :options="options" ref="timeseries"></highcharts>
-          ```
+    ###### Display
+    To mount the chart, pass the $options to the options prop of the highcharts component as follows:
+    ```
+     <highcharts :options="options" ref="timeseries"></highcharts>
+     ```
 
-         ##### Example
-         Sample code for a complete component with sample data is given at
-         **_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
+    ##### Example
+    Sample code for a complete component with sample data is given at
+    **_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
 
 <a name="chartjs"></a>
 ### [2. ChartJS](http://www.chartjs.org/samples/latest/)
 
-<a name="pie-chartjs"></a>
-#### i. Pie charts 
+   <a name="pie-chartjs"></a>
+   #### i. Pie charts 
 
-##### Example
-Sample code for a complete component with sample data is given at
-**_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
+   ##### Example
+   Sample code for a complete component with sample data is given at
+   **_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
 
 <a name="multilinear-charts"></a>
 #### ii. Multilinear Charts 
