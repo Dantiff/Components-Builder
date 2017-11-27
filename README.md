@@ -24,7 +24,8 @@ Table of Contents
 ## Material UI
 In this setup, the app selects __[Vuetify](https://vuetifyjs.com/)__, a popular material component framwork with over __6,500__ tags on github, to illustrate basic/advanced setup and usage of Google's material UI with VueJS.
 
-6.  Indent sub-lists by the same amount as the item text;
+6.  <h1> Material UI </h1>
+    Indent sub-lists by the same amount as the item text;
     this must be 4-7 spaces more than the symbol or number.
 
     1.  if enumerated, always start them with 1.
