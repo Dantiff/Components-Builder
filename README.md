@@ -44,7 +44,7 @@ Since most of the advanced JavaScript chart packages and available tutorials and
 some of the chart examples covered in the app include:
 
 <a name="highcharts"></a>
-[1. Highcharts](https://github.com/weizhenye/vue-highcharts)
+<h4>[1. Highcharts](https://github.com/weizhenye/vue-highcharts)</h4>
      Before you can start using highcarts, there are a number of configurations that must be done and which must be included in the app's bootstrap file. All configs required in order to use either highcharts, highstock, highmaps, drilldown, solid guage or highcharts more are listed as follows:
 
      ```
