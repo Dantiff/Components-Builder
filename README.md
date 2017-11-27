@@ -30,8 +30,10 @@ some of the chart examples covered in the app include:
 
 <a name="highcharts"></a>
   *   <h3><a href="https://github.com/weizhenye/vue-highcharts">Highcharts</a></h3>
-
-      Before you can start using highcarts, there are a number of configurations that must be done and which must be      included in the app's bootstrap file. All configs required in order to use either highcharts, highstock, highmaps, drilldown, solid guage or highcharts more are listed as follows:
+      
+      [Highcharts Configuration Syntax](https://www.tutorialspoint.com/highcharts/highcharts_configuration_syntax.htm) provides the configuration required to draw charts and as well provides a sample for drawing `multi-linear` and `time series` charts. However, all examples are provided in `es5` JavaScript syntax. Below is a result of the same using `es6` JS syntax.
+      
+      Before you can start using highcarts, there are a number of configurations that must be done and which must be      included in the app's `bootstrap.js` file. All configs required in order to use either `highcharts, highstock, highmaps, drilldown, solid guage or highcharts more` are listed as follows:
       
       ```
       import VueHighcharts from 'vue-highcharts';
@@ -62,7 +64,7 @@ some of the chart examples covered in the app include:
         
       * 
         #### TimeSeries Charts 
-        [Highcharts Configuration Syntax](https://www.tutorialspoint.com/highcharts/highcharts_configuration_syntax.htm) provides the configuration required to draw charts and as well provides a sample for drawing time series charts. However, all examples are provided in es5 JavaScript syntax. Below is a result of the same using es6 JS syntax.
+        
          ##### Configuration
          ###### chart
          Configure the chart to make it zoomable. chart.zoomType decides the dimensions by which the user can zoom by dragging the mouse. The possible values for this are x, y or xy.
@@ -104,7 +106,7 @@ some of the chart examples covered in the app include:
          ```
 
          ###### Display
-         To mount the chart, pass the $options to the options prop of the highcharts component as follows:
+         To mount the chart, pass the `$options` to the `options prop` of the highcharts component as follows:
          ```
           <highcharts :options="options" ref="timeseries"></highcharts>
           ```
@@ -139,7 +141,7 @@ Among the maps packages covered in the app include **_google maps_**. Detailed d
       
       * 
         #### Google Maps- (using [Vue2-google-maps](https://github.com/xkjyeah/vue-google-maps))
-        Before you can start using google maps (vue2-google-maps) in your vue app, the following configurations must be included in the app's bootstrap file. 
+        Before you can start using google maps (vue2-google-maps) in your vue app, the following configurations must be included in the app's `bootstrap.js` file. 
           ```
           import * as VueGoogleMaps from 'vue2-google-maps';
 
@@ -157,7 +159,7 @@ Among the maps packages covered in the app include **_google maps_**. Detailed d
         All you need now is to add methods in your googlemaps component to improve the functionality and responsiveness of your maps. Below are some of the functions that give you the basic functionalities:
 
         ##### Set Location using auto-complete
-        When using vue2-google-maps' autocomplete package, the following method will help you store and mark the selected location on the map.
+        When using `vue2-google-maps'` autocomplete package, the following method will help you store and mark the selected location on the map.
           ```
           setPlace(place) {
             const setData = () => {
@@ -182,7 +184,8 @@ Among the maps packages covered in the app include **_google maps_**. Detailed d
           ```
 
         ##### Zoom and Focus on Location
-        The following method allows user to conditionally increasing the zoom index of the map. PS. The map center has to be set to the location of interest for map to be able to zoom and focus on the intended location.
+        The following method allows user to conditionally increasing the zoom index of the map. 
+        __PS.__ `The map center has to be set to the location of interest for map to be able to zoom and focus on the intended location.`
           ```
            focus(increament) {
              // increament zoom only when specified. Otherwise zoom back to guage 16
@@ -195,7 +198,8 @@ Among the maps packages covered in the app include **_google maps_**. Detailed d
            ```
 
         ##### Get Current Use Location
-        This example uses __navigator__ to get the current location of the user and mark it on the map. PS: The user has to allow navigator to access device location before the actual location can be recorded.
+        This example uses __navigator__ to get the current location of the user and mark it on the map. 
+        __PS:__ `The user has to allow navigator to access device location before the actual location can be recorded. 
           ```
           lockUserLocation() {
             const lock = async () => {
