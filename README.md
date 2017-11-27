@@ -33,7 +33,7 @@ In this setup, the app selects __[Vuetify](https://vuetifyjs.com/)__, a popular 
       + (the same rules apply to sub-sub-lists, etcetera)
 
   Additional non-sub-list paragraphs require the same indentation;
-  example blocks (after double colon ``::``) must be indented at
+  example blocks (after double colon ``::``) must be indented at dhjgsedjfhgjwef kwuehufkwerykwu erykquyrv kuyekur eyku ryk ewu yrkeu rw
   least eight spaces more than the symbol or number, like this::
 
       * item text::
@@ -44,6 +44,17 @@ Since most of the advanced JavaScript chart packages and available tutorials and
 some of the chart examples covered in the app include:
 
 <a name="highcharts"></a>
+ 1.  <h4>[Highcharts](https://github.com/weizhenye/vue-highcharts)</h4>
+
+      Before you can start using highcarts, there are a number of configurations that must be done and which must be      included in the app's bootstrap file. All configs required in order to use either highcharts, highstock, highmaps, drilldown, solid guage or highcharts more are listed as follows:
+
+     Additional non-sub-list paragraphs require the same indentation;
+     example blocks (after double colon ``::``) must be indented at
+     least eight spaces more than the symbol or number, like this::
+
+         * item text::
+
+                 code block
 <h4> 1. [Highcharts](https://github.com/weizhenye/vue-highcharts) </h4>
    Before you can start using highcarts, there are a number of configurations that must be done and which must be included in the app's bootstrap file. All configs required in order to use either highcharts, highstock, highmaps, drilldown, solid guage or highcharts more are listed as follows:
 
