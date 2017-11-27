@@ -100,6 +100,24 @@ export default [
     },
   },
 
+  // Forms
+  {
+    path: '/forms',
+    name: 'forms.index',
+    component: require('@/modules/forms/components/index.vue'),
+    meta: {
+      auth: true,
+    },
+  },
+  {
+    path: '/forms/vuetify/validations',
+    name: 'forms.vuetify.validations',
+    component: require('@/modules/forms/components/validations.vue'),
+    meta: {
+      auth: true,
+    },
+  },
+
   {
     path: '/',
     redirect: '/home',

@@ -9,6 +9,7 @@
         items: [
           { link: { name: 'charts.index' }, icon: 'bubble_chart', title: 'Chart Components' },
           { link: { name: 'maps.index' }, icon: 'my_location', title: 'Map Components' },
+          { link: { name: 'forms.index' }, icon: 'receipt', title: 'Form Components' },
         ],
         miniVariant: false,
         right: true,

@@ -11,7 +11,7 @@
         show: false,
       };
     },
-    description: 'Autocomplete Example',
+    description: 'Google Maps Autocomplete Example',
     methods: {
       setPlace(place) {
         const setData = () => {
