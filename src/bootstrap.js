@@ -234,6 +234,51 @@ Vue.use(VueGoogleMaps, {
 });
 
 
+/* ============
+ * Material UI Form Validation: VeeValidate
+ * ============
+ *
+ * Require VeeValidate.
+ *
+ * https://www.npmjs.com/package/vee-validate
+ */
+import VeeValidate, { Validator } from 'vee-validate';
+
+const config = {
+  errorBagName: 'vErrors', // change if property conflicts.
+  fieldsBagName: 'vFields',
+  delay: 0,
+  locale: 'en',
+  dictionary: null,
+  strict: true,
+  enableAutoClasses: false,
+  classNames: {
+    touched: 'touched', // the control has been blurred
+    untouched: 'untouched', // the control hasn't been blurred
+    valid: 'valid', // model is valid
+    invalid: 'invalid', // model is invalid
+    pristine: 'pristine', // control has not been interacted with
+    dirty: 'dirty', // control has been interacted with
+  },
+  events: 'input|blur',
+  inject: true,
+};
+
+Vue.use(VeeValidate, config);
+
+Validator.extend('passwordConfirmation', {
+  getMessage(field, [password, value]) {
+    return (value === password) || 'Passwords do not match';
+  },
+  validate(value, [password]) {
+    if (value === undefined || value === null) {
+      return false;
+    }
+    return value === password;
+  },
+});
+
+
 export default {
   router,
   i18n,
