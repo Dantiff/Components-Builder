@@ -13,19 +13,19 @@
     },
     description: 'Autocomplete Example',
     methods: {
-      setDescription(description) {
-        this.description = description;
-      },
       setPlace(place) {
         const setData = () => {
           const p = place.geometry.location;
           const position = { lat: p.lat(), lng: p.lng() };
 
           this.center = { ...position };
-          this.markersStore = [...this.markersStore, { position }];
           this.place = place;
+
+          // Update store data for later retrieval
+          this.markersStore = [...this.markersStore, { position }];
         };
 
+        // Sync and await for all data to be set before focusing on location
         const update = async () => {
           await setData();
           return this.focus();
@@ -34,6 +34,7 @@
         update();
       },
       focus(increament) {
+        // increament zoom only when specified. Otherwise zoom back to guage 16
         if (increament) {
           this.zoom = increament ? this.zoom + 1 : this.zoom;
         } else {
@@ -47,12 +48,15 @@
               lat: p.coords.latitude,
               lng: p.coords.longitude,
             };
+
+            // Clear autocomplete and push location to map-markers
             this.center = { ...position };
             this.place = null;
             this.markers = [{ position }];
           });
         };
 
+        // Sync and await for all data to be set before focusing on location
         const update = async () => {
           await lock();
           return this.focus();
@@ -81,7 +85,7 @@
                 floating
                 dense
               >
-                <v-tooltip right>
+                <v-tooltip white right>
                   <v-btn 
                     icon
                     slot="activator"
@@ -93,7 +97,7 @@
                 </v-tooltip>
 
                 <span v-if="show">
-                  <GmapAutocomplete @place_changed="setPlace"></GmapAutocomplete>
+                  <GmapAutocomplete @place_changed="setPlace" :keyup.enter="setPlace"></GmapAutocomplete>
                   <v-btn icon @click="lockUserLocation">
                     <v-icon>my_location</v-icon>
                   </v-btn>
