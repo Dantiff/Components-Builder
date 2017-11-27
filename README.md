@@ -70,12 +70,14 @@ some of the chart examples covered in the app include:
       Vue.use(VueHighcharts, { Highcharts });
       ```
       * MultiLinear charts
+        #### MultiLinear charts
         ##### Example
         Sample code for a complete component with sample data is given at
         **_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/multiLinearChart.vue)_**
         
-      * TimeSeries Charts 
-        The [Highcharts Configuration Syntax](https://www.tutorialspoint.com/highcharts/highcharts_configuration_syntax.htm) provides the configuration required to draw charts and as well provides a sample for drawing time series charts. However, all examples are provided in es5 JavaScript syntax. Below is a result of the same using es6 JS syntax.
+      * TimeSeries Charts
+        #### MultiLinear charts 
+        [Highcharts Configuration Syntax](https://www.tutorialspoint.com/highcharts/highcharts_configuration_syntax.htm) provides the configuration required to draw charts and as well provides a sample for drawing time series charts. However, all examples are provided in es5 JavaScript syntax. Below is a result of the same using es6 JS syntax.
          ##### Configuration
          ###### chart
          Configure the chart to make it zoomable. chart.zoomType decides the dimensions by which the user can zoom by dragging the mouse. The possible values for this are x, y or xy.
