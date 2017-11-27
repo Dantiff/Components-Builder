@@ -30,6 +30,29 @@ some of the chart examples covered in the app include:
 
 <a name="highcharts"></a>
 ### [1. Highcharts](https://github.com/weizhenye/vue-highcharts)
+Before you can start using highcarts, there are a number of configurations that must be done and which must be included in the app's bootstrap file. All configs required in order to use either highcharts, highstock, highmaps, drilldown, solid guage or highcharts more are listed as follows:
+
+  ```
+  import VueHighcharts from 'vue-highcharts';
+  import Highcharts from 'highcharts';
+
+  // load these modules as your need
+  import loadStock from 'highcharts/modules/stock';
+  import loadMap from 'highcharts/modules/map';
+  import loadDrilldown from 'highcharts/modules/drilldown';
+  // some charts like solid gauge require `highcharts-more.js`, you can find it in official demo.
+  import loadHighchartsMore from 'highcharts/highcharts-more';
+  import loadSolidGauge from 'highcharts/modules/solid-gauge';
+
+  loadStock(Highcharts);
+  loadMap(Highcharts);
+  loadDrilldown(Highcharts);
+  loadHighchartsMore(Highcharts);
+  loadSolidGauge(Highcharts);
+
+  // Now you can use Highstock, Highmaps, drilldown and solid gauge.
+  Vue.use(VueHighcharts, { Highcharts });
+  ```
 <a name="multilinear-highcharts"></a>
 #### i. MultiLinear charts 
 
@@ -120,7 +143,91 @@ Among the maps packages covered in the app include **_google maps_**. Detailed d
 
 <a name="googlemaps"></a>
 ### [1. Google Maps](https://developers.google.com/maps/)
+
 #### * [Google Maps](https://github.com/xkjyeah/vue-google-maps)- (using Vue2-google-maps)
+
+Before you can start using google maps (vue2-google-maps) in your vue app, the following configurations must be included in the app's bootstrap file. 
+  ```
+  import * as VueGoogleMaps from 'vue2-google-maps';
+
+  Vue.use(VueGoogleMaps, {
+    load: {
+      key: 'AIzaSyBD-HS_7rOrfHc3O6hgTyBk31rUAnwD78o',
+      libraries: 'places,drawing,visualization', // This is required if you use the Autocomplete plugin
+      // OR: libraries: 'places,drawing'
+      // OR: libraries: 'places,drawing,visualization'
+      // (as you require)
+    },
+  });
+  ```
+<h5>That's it!!</h5>
+All you need now is to add methods in your googlemaps component to improve the functionality and responsiveness of your maps. Below are some of the functions that give you the basic functionalities:
+
+##### Set Location using auto-complete
+When using vue2-google-maps' autocomplete package, the following method will help you store and mark the selected location on the map.
+  ```
+  setPlace(place) {
+    const setData = () => {
+      const p = place.geometry.location;
+      const position = { lat: p.lat(), lng: p.lng() };
+
+      this.center = { ...position };
+      this.place = place;
+
+      // Update store data for later retrieval
+      this.markersStore = [...this.markersStore, { position }];
+    };
+
+    // Sync and await for all data to be set before focusing on location
+    const update = async () => {
+      await setData();
+      return this.focus();
+    };
+
+    update();
+  },
+  ```
+
+##### Zoom and Focus on Location
+The following method allows user to conditionally increasing the zoom index of the map. PS. The map center has to be set to the location of interest for map to be able to zoom and focus on the intended location.
+  ```
+   focus(increament) {
+     // increament zoom only when specified. Otherwise zoom back to guage 16
+     if (increament) {
+       this.zoom = increament ? this.zoom + 1 : this.zoom;
+     } else {
+       this.zoom = 16;
+     }
+   },
+   ```
+
+##### Get Current Use Location
+This example uses __navigator__ to get the current location of the user and mark it on the map. PS: The user has to allow navigator to access device location before the actual location can be recorded.
+  ```
+  lockUserLocation() {
+    const lock = async () => {
+      navigator.geolocation.getCurrentPosition((p) => {
+        const position = {
+          lat: p.coords.latitude,
+          lng: p.coords.longitude,
+        };
+
+        // Clear autocomplete and push location to map-markers
+        this.center = { ...position };
+        this.place = null;
+        this.markers = [{ position }];
+      });
+    };
+
+    // Sync and await for all data to be set before focusing on location
+    const update = async () => {
+      await lock();
+      return this.focus();
+    };
+
+    update();
+  },
+  ```
 
 ##### Example
 Sample code for a complete component with sample data is given at
