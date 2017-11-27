@@ -136,6 +136,7 @@ Among the maps packages covered in the app include **_google maps_**. Detailed d
 
 <a name="googlemaps"></a>
   *   <h3><a href="https://developers.google.com/maps/">Google Maps</a></h3>
+      
       * 
         #### [Google Maps](https://github.com/xkjyeah/vue-google-maps)- (using Vue2-google-maps)
         Before you can start using google maps (vue2-google-maps) in your vue app, the following configurations must be included in the app's bootstrap file. 
