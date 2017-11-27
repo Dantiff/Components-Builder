@@ -186,7 +186,7 @@ Among the maps packages covered in the app include **_google maps_**. Detailed d
         ##### Zoom and Focus on Location
         The following method allows user to conditionally increasing the zoom index of the map.
         
-        __PS:__ The map center has to be set to the location of interest for map to be able to zoom and focus on the intended location.
+        __PS:__ `The map center has to be set to the location of interest for map to be able to zoom and focus on the intended location.`
           ```
            focus(increament) {
              // increament zoom only when specified. Otherwise zoom back to guage 16
@@ -201,7 +201,7 @@ Among the maps packages covered in the app include **_google maps_**. Detailed d
         ##### Get Current Use Location
         This example uses __navigator__ to get the current location of the user and mark it on the map.
         
-        __PS:__ The user has to allow navigator to access device location before the actual location can be recorded. 
+        __PS:__ `The user has to allow navigator to access device location before the actual location can be recorded.` 
           ```
           lockUserLocation() {
             const lock = async () => {
