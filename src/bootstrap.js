@@ -245,8 +245,8 @@ Vue.use(VueGoogleMaps, {
 import VeeValidate, { Validator } from 'vee-validate';
 
 const config = {
-  errorBagName: 'vErrors', // change if property conflicts.
-  fieldsBagName: 'vFields',
+  errorBagName: 'errors', // change if property conflicts.
+  fieldsBagName: 'fields',
   delay: 0,
   locale: 'en',
   dictionary: null,
