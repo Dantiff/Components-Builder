@@ -1,5 +1,6 @@
 
 <script>
+
   export default {
     $validates: true,
     data() {
@@ -8,30 +9,39 @@
         select: null,
         open: false,
         current: 0,
-        suggestions: ['Intoxicating', 'Life', 'Command', 'Intense', 'Carrier', 'Dominant'],
+        suggestions: [
+          { name: 'Intoxicating' },
+          { name: 'Life' },
+          { name: 'Command' },
+          { name: 'Intense' },
+          { name: 'Carrier' },
+          { name: 'Dominant' },
+        ],
+        selectedTags: [],
       };
     },
     computed: {
       // Filtering the suggestion based on the input
       matches() {
         // eslint-disable-next-line
-        return this.suggestions.filter((str) => {
-          return str.indexOf(this.selection) >= 0;
+        return this.suggestions.filter((s) => {
+          return s.name.indexOf(this.selection) >= 0;
         });
       },
       // The flag
       openSuggestion() {
-        return this.selection !== '' &&
-          this.matches.length !== 0 &&
+        return this.matches.length !== 0 &&
           this.open === true;
       },
     },
     methods: {
       // When enter pressed on the input
       enter() {
-        console.log('entered');
-        this.selection = this.matches[this.current];
+        this.matches[this.current].selected = true;
+        this.selectedTags.push({ ...this.matches[this.current] });
+        this.selection = '';
         this.open = false;
+        console.log('entered', this.selectedTags);
       },
 
       // When up pressed while suggestions are open
@@ -66,10 +76,26 @@
         }
       },
 
+      // When the user leaves input field
+      blur() {
+        setTimeout(() => {
+          this.open = false;
+        }, 500);
+      },
+
       // When one of the suggestion is clicked
       suggestionClick(index) {
-        this.selection = this.matches[index];
+        this.matches[index].selected = true;
+        this.selectedTags.push({ ...this.matches[index] });
+        this.selection = '';
         this.open = false;
+        console.log('entered', this.selectedTags);
+      },
+
+      // Remove tag from list of selected
+      remove(i) {
+        const clonedValue = this.selectedTags.slice();
+        clonedValue.splice(i, 1);
       },
     },
   };
@@ -81,24 +107,53 @@
       <v-layout row wrap>
         <v-flex xs8 lg6>
           <v-card-text>
-            <div style="position:relative" v-bind:class="{'open':openSuggestion}">
+            <div 
+              style="position:relative" 
+              class="tag-input" 
+              :class="{'open':openSuggestion}"
+            >
               <v-text-field
                 v-model="selection"
                 label="Add Tag"
                 @keyup.enter = 'enter'
-                @keyup.space = 'enter'
                 @keyup.down = 'down'
                 @keyup.up = 'up'
                 @input = 'change'
+                @focus = 'change'
+                @blur = 'blur'
               ></v-text-field>
               <ul class="dropdown-menu" style="width:100%">
-                  <li v-for="(s, i) in matches"
+                  <li 
+                    v-for="(s, i) in matches"
+                    v-if="!s.selected"
                     :class="{'active': isActive(i)}"
                     @click="suggestionClick(i)"
                   >
-                    <a href="#">{{ s }}</a>
+                    <a href="#">{{ s.name }}</a>
                   </li>
               </ul>
+              <div class="selected-tags">
+                <span 
+                  v-for="(t, i) in selectedTags" 
+                  class="tag"
+                >
+                  <v-chip 
+                    close
+                    @input="remove(i)"
+                    v-model="t.selected"
+                    color="red"
+                    dark
+                    label
+                  > {{ t.name }} </v-chip>
+                  <!-- 
+                  <v-icon 
+                    dark 
+                    right 
+                    color="red"
+                    @click="remove(i)"
+                  >clear</v-icon> -->
+                </span>
+              </div>
             </div>
           </v-card-text>
         </v-flex>
@@ -106,3 +161,27 @@
     </v-container>
   </v-max-layout>
 </template>
+
+<style lang='stylus'>
+  .tag-input
+    .input-group
+      .input-group__details
+        min-height 0 !important
+    .dropdown-menu
+      margin 0
+    .selected-tags
+      .tag
+        .chip--label
+          border-radius 5px
+        .chip__content
+          color #ffffff
+          height 16px
+          padding 0 0px 0 5px
+          font-size 12.5px
+          font-weight 400
+          border-radius 4px
+          .chip__close
+            margin 0 2px 0 2px
+            .icon
+              font-size 13px
+</style>
