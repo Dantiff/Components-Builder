@@ -10,14 +10,13 @@
         open: false,
         current: 0,
         suggestions: [
-          { name: 'Intoxicating', selected: false },
-          { name: 'Life', selected: false },
-          { name: 'Command', selected: false },
-          { name: 'Intense', selected: false },
-          { name: 'Carrier', selected: false },
-          { name: 'Dominant', selected: false },
+          { name: 'Intoxicating', slug: 'intoxicating', selected: false },
+          { name: 'Life', slug: 'life', selected: false },
+          { name: 'Command', slug: 'command', selected: false },
+          { name: 'Intense', slug: 'intense', selected: false },
+          { name: 'Carrier', slug: 'carrier', selected: false },
+          { name: 'Dominant', slug: 'dominant', selected: false },
         ],
-        selectedTags: [],
       };
     },
     computed: {
@@ -28,6 +27,13 @@
           return s.name.indexOf(this.selection) >= 0 && !s.selected;
         });
       },
+      // Filtering the matches to get the selected tags
+      selectedTags() {
+        // eslint-disable-next-line
+        return this.suggestions.filter((s) => {
+          return s.selected;
+        });
+      },
       // The flag
       openSuggestion() {
         return this.matches.length !== 0 &&
@@ -35,9 +41,9 @@
       },
     },
     watch: {
-      matches: {
+      suggestions: {
         handler() {
-          console.log('matches changed', this.matches);
+          console.log('suggestions changed', this.suggestions);
         },
         deep: true,
       },
@@ -45,8 +51,13 @@
     methods: {
       // When enter pressed on the input
       enter() {
-        this.selectedTags.push({ ...this.matches[this.current], selected: true });
-        this.matches[this.current].selected = true;
+        // this.suggestions.push({ ...this.matches[this.current], selected: true });
+        this.suggestions = this.suggestions.map((s) => {
+          if (s.slug === this.matches[this.current].slug) {
+            s.selected = false;
+          }
+          return s;
+        });
         this.selection = '';
         this.open = false;
         console.log('entered', this.selectedTags);
@@ -93,8 +104,13 @@
 
       // When one of the suggestion is clicked
       suggestionClick(index) {
-        this.selectedTags.push({ ...this.matches[index], selected: true });
-        this.matches[index].selected = true;
+        // this.suggestions.push({ ...this.matches[index], selected: true });
+        this.suggestions = this.suggestions.map((s) => {
+          if (s.slug === this.matches[index].slug) {
+            s.selected = false;
+          }
+          return s;
+        });
         this.selection = '';
         this.open = false;
         console.log('entered', this.selectedTags);
@@ -141,12 +157,11 @@
               </ul>
               <div class="selected-tags">
                 <span 
-                  v-for="(t, i) in selectedTags" 
+                  v-for="(t, i) in selectedTags"
                   class="tag"
                 >
                   <v-chip 
                     close
-                    @input="remove(i)"
                     v-model="t.selected"
                     color="red"
                     dark
