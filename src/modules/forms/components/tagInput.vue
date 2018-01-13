@@ -27,14 +27,6 @@
       },
     },
     methods: {
-      submit() {
-        this.$validator.validateAll();
-      },
-      clear() {
-        this.name = '';
-        this.select = null;
-        this.$validator.clean();
-      },
       // When enter pressed on the input
       enter() {
         console.log('entered');
@@ -89,30 +81,25 @@
       <v-layout row wrap>
         <v-flex xs8 lg6>
           <v-card-text>
-            <form>
-              <div style="position:relative" v-bind:class="{'open':openSuggestion}">
-                <v-text-field
-                  v-model="selection"
-                  label="Add Tag"
-                  @keyup.enter.stop = 'enter'
-                  @keyup.space = 'enter'
-                  @keyup.down = 'down'
-                  @keyup.up = 'up'
-                  @input = 'change'
-                ></v-text-field>
-                <ul class="dropdown-menu" style="width:100%">
-                    <li v-for="(s, i) in matches"
-                      :class="{'active': isActive(i)}"
-                      @click="suggestionClick(i)"
-                    >
-                      <a href="#">{{ s }}</a>
-                    </li>
-                </ul>
-              </div>
-
-              <v-btn @click="submit">submit</v-btn>
-              <v-btn @click="clear">clear</v-btn>
-            </form>
+            <div style="position:relative" v-bind:class="{'open':openSuggestion}">
+              <v-text-field
+                v-model="selection"
+                label="Add Tag"
+                @keyup.enter = 'enter'
+                @keyup.space = 'enter'
+                @keyup.down = 'down'
+                @keyup.up = 'up'
+                @input = 'change'
+              ></v-text-field>
+              <ul class="dropdown-menu" style="width:100%">
+                  <li v-for="(s, i) in matches"
+                    :class="{'active': isActive(i)}"
+                    @click="suggestionClick(i)"
+                  >
+                    <a href="#">{{ s }}</a>
+                  </li>
+              </ul>
+            </div>
           </v-card-text>
         </v-flex>
       </v-layout>
