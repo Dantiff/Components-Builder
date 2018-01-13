@@ -36,14 +36,15 @@
       },
       // The flag
       openSuggestion() {
-        return this.matches.length !== 0 &&
-          this.open === true;
+        return this.matches.length !== 0 && this.open === true;
       },
     },
     watch: {
-      suggestions: {
+      matches: {
         handler() {
-          console.log('suggestions changed', this.suggestions);
+          if (this.matches.length === 0) {
+            // console.log('zero matches', this.matches);
+          }
         },
         deep: true,
       },
@@ -51,10 +52,14 @@
     methods: {
       // When enter pressed on the input
       enter() {
+        if (this.matches.length === 0) {
+          console.log('zero matches', this.selection);
+          this.suggestions.push({ name: this.selection, selected: true, color: 'red' });
+        }
+
         this.matches[this.current].selected = true;
         this.selection = '';
         this.open = false;
-        console.log('entered', this.selectedTags);
       },
 
       // When up pressed while suggestions are open
@@ -85,13 +90,16 @@
           this.open = true;
           this.current = 0;
         }
+        if (this.matches.length === 0) {
+          console.log('zero matches', this.selection);
+        }
       },
 
       // When the user leaves input field
       blur() {
         setTimeout(() => {
           this.open = false;
-        }, 500);
+        }, 50);
       },
 
       // When one of the suggestion is clicked
@@ -100,12 +108,6 @@
         this.selection = '';
         this.open = false;
         console.log('entered', this.selectedTags);
-      },
-
-      // Remove tag from list of selected
-      remove(i) {
-        const clonedValue = this.selectedTags.slice();
-        clonedValue.splice(i, 1);
       },
     },
   };
@@ -134,7 +136,10 @@
                   @blur = 'blur'
                   slot="activator"
                 ></v-text-field>
-                <v-list class="menu-list">
+                <v-list 
+                  class="menu-list"
+                  :class="{'menu-list-closed':this.matches.length === 0}"
+                >
                   <v-list-tile
                       v-for="(s, i) in matches"
                       :class="{'active': isActive(i)}"
@@ -174,6 +179,23 @@
         min-height 0 !important
     .menu
       width 100%
+    .selected-tags
+      .tag
+        .chip--label
+          border-radius 5px
+        .chip__content
+          color #ffffff
+          height 16px
+          padding 0 0px 0 5px
+          font-size 12.5px
+          font-weight 400
+          border-radius 4px
+          .chip__close
+            margin 0 2px 0 2px
+            .icon
+              font-size 13px
+  .menu-list-closed
+    display none
   .menu-list
     padding 2px 0
     .active
@@ -191,19 +213,4 @@
         color #333333
         &:hover, &:focus
           background-color rgba(0,0,0,.12)
-    .selected-tags
-      .tag
-        .chip--label
-          border-radius 5px
-        .chip__content
-          color #ffffff
-          height 16px
-          padding 0 0px 0 5px
-          font-size 12.5px
-          font-weight 400
-          border-radius 4px
-          .chip__close
-            margin 0 2px 0 2px
-            .icon
-              font-size 13px
 </style>
