@@ -10,12 +10,12 @@
         open: false,
         current: 0,
         suggestions: [
-          { name: 'Intoxicating', slug: 'intoxicating', selected: false },
-          { name: 'Life', slug: 'life', selected: false },
-          { name: 'Command', slug: 'command', selected: false },
-          { name: 'Intense', slug: 'intense', selected: false },
-          { name: 'Carrier', slug: 'carrier', selected: false },
-          { name: 'Dominant', slug: 'dominant', selected: false },
+          { name: 'Intoxicating', slug: 'intoxicating', selected: false, color: 'red' },
+          { name: 'Life', slug: 'life', selected: false, color: 'blue' },
+          { name: 'Command', slug: 'command', selected: false, color: 'grey' },
+          { name: 'Intense', slug: 'intense', selected: false, color: 'orange' },
+          { name: 'Carrier', slug: 'carrier', selected: false, color: 'yellow' },
+          { name: 'Dominant', slug: 'dominant', selected: false, color: 'black' },
         ],
       };
     },
@@ -59,7 +59,6 @@
 
       // When up pressed while suggestions are open
       up() {
-        console.log('entered up');
         if (this.current > 0) {
           // eslint-disable-next-line
           this.current--;
@@ -68,7 +67,6 @@
 
       // When up pressed while suggestions are open
       down() {
-        console.log('entered down');
         if (this.current < this.matches.length - 1) {
           // eslint-disable-next-line
           this.current++;
@@ -93,7 +91,7 @@
       blur() {
         setTimeout(() => {
           this.open = false;
-        }, 500);
+        }, 500000);
       },
 
       // When one of the suggestion is clicked
@@ -151,17 +149,10 @@
                   <v-chip 
                     close
                     v-model="t.selected"
-                    color="red"
+                    :color="t.color"
                     dark
                     label
                   > {{ t.name }} </v-chip>
-                  <!-- 
-                  <v-icon 
-                    dark 
-                    right 
-                    color="red"
-                    @click="remove(i)"
-                  >clear</v-icon> -->
                 </span>
               </div>
             </div>
@@ -179,6 +170,19 @@
         min-height 0 !important
     .dropdown-menu
       margin 0
+      top 50px
+      overflow-y auto
+      overflow-x hidden
+      contain content
+      -webkit-box-shadow 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12)
+      box-shadow 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12)
+      li
+        .active
+          a
+            background-color #99bbff
+        a
+          &:hover, &:focus
+            background-color rgba(0,0,0,.12)
     .selected-tags
       .tag
         .chip--label
