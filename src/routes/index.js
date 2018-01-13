@@ -117,6 +117,15 @@ export default [
       auth: true,
     },
   },
+  {
+    path: '/forms/vuetify/tag-input',
+    name: 'forms.vuetify.tag-input',
+    component: require('@/modules/forms/components/tagInput.vue'),
+    meta: {
+      auth: true,
+    },
+  },
+
 
   {
     path: '/',

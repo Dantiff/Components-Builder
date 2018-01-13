@@ -9,6 +9,7 @@
             text: 'A es6-based implementation of Vue Forms',
             forms: [
               { link: { name: 'forms.vuetify.validations' }, title: 'Vuetify form validations using Vee-validate' },
+              { link: { name: 'forms.vuetify.tag-input' }, title: 'Material based tag-input component' },
             ],
           },
         ],
