@@ -51,13 +51,7 @@
     methods: {
       // When enter pressed on the input
       enter() {
-        // this.suggestions.push({ ...this.matches[this.current], selected: true });
-        this.suggestions = this.suggestions.map((s) => {
-          if (s.slug === this.matches[this.current].slug) {
-            s.selected = false;
-          }
-          return s;
-        });
+        this.matches[this.current].selected = true;
         this.selection = '';
         this.open = false;
         console.log('entered', this.selectedTags);
@@ -104,13 +98,7 @@
 
       // When one of the suggestion is clicked
       suggestionClick(index) {
-        // this.suggestions.push({ ...this.matches[index], selected: true });
-        this.suggestions = this.suggestions.map((s) => {
-          if (s.slug === this.matches[index].slug) {
-            s.selected = false;
-          }
-          return s;
-        });
+        this.matches[index].selected = true;
         this.selection = '';
         this.open = false;
         console.log('entered', this.selectedTags);
