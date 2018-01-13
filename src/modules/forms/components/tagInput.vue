@@ -6,9 +6,9 @@
     data() {
       return {
         selection: '',
-        select: null,
         open: false,
         current: 0,
+        openSuggestion: false,
         suggestions: [
           { name: 'Intoxicating', slug: 'intoxicating', selected: false, color: 'red' },
           { name: 'Life', slug: 'life', selected: false, color: 'blue' },
@@ -91,7 +91,7 @@
       blur() {
         setTimeout(() => {
           this.open = false;
-        }, 500000);
+        }, 500);
       },
 
       // When one of the suggestion is clicked
@@ -122,25 +122,29 @@
               class="tag-input" 
               :class="{'open':openSuggestion}"
             >
-              <v-text-field
-                v-model="selection"
-                label="Add Tag"
-                @keyup.enter = 'enter'
-                @keyup.down = 'down'
-                @keyup.up = 'up'
-                @input = 'change'
-                @focus = 'change'
-                @blur = 'blur'
-              ></v-text-field>
-              <ul class="dropdown-menu" style="width:100%">
-                  <li 
-                    v-for="(s, i) in matches"
-                    :class="{'active': isActive(i)}"
-                    @click="suggestionClick(i)"
+              <v-menu offset-y v-model='openSuggestion'>
+                <v-text-field
+                  v-model="selection"
+                  label="Add Tag"
+                  @keyup.enter = 'enter'
+                  @keyup.down = 'down'
+                  @keyup.up = 'up'
+                  @input = 'change'
+                  @focus = 'change'
+                  @blur = 'blur'
+                  slot="activator"
+                ></v-text-field>
+                <v-list>
+                  <v-list-tile
+                      v-for="(s, i) in matches"
+                      :class="{'active': isActive(i)}"
+                      :key='i'
+                      @click="suggestionClick(i)"
                   >
-                    <a href="#">{{ s.name }}</a>
-                  </li>
-              </ul>
+                    <v-list-tile-title>{{ s.name }}</v-list-tile-title>
+                  </v-list-tile>
+                </v-list>
+              </v-menu>
               <div class="selected-tags">
                 <span 
                   v-for="(t, i) in selectedTags"

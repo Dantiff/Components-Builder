@@ -155,8 +155,8 @@ window.$ = window.jQuery = jQuery;
  *
  * http://getbootstrap.com/
  */
-require('bootstrap');
-require('bootstrap/less/bootstrap.less');
+// require('bootstrap');
+// require('bootstrap/less/bootstrap.less');
 
 
 /* ============
