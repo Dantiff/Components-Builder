@@ -10,12 +10,12 @@
         open: false,
         current: 0,
         suggestions: [
-          { name: 'Intoxicating' },
-          { name: 'Life' },
-          { name: 'Command' },
-          { name: 'Intense' },
-          { name: 'Carrier' },
-          { name: 'Dominant' },
+          { name: 'Intoxicating', selected: false },
+          { name: 'Life', selected: false },
+          { name: 'Command', selected: false },
+          { name: 'Intense', selected: false },
+          { name: 'Carrier', selected: false },
+          { name: 'Dominant', selected: false },
         ],
         selectedTags: [],
       };
@@ -25,7 +25,7 @@
       matches() {
         // eslint-disable-next-line
         return this.suggestions.filter((s) => {
-          return s.name.indexOf(this.selection) >= 0;
+          return s.name.indexOf(this.selection) >= 0 && !s.selected;
         });
       },
       // The flag
@@ -34,11 +34,19 @@
           this.open === true;
       },
     },
+    watch: {
+      matches: {
+        handler() {
+          console.log('matches changed', this.matches);
+        },
+        deep: true,
+      },
+    },
     methods: {
       // When enter pressed on the input
       enter() {
+        this.selectedTags.push({ ...this.matches[this.current], selected: true });
         this.matches[this.current].selected = true;
-        this.selectedTags.push({ ...this.matches[this.current] });
         this.selection = '';
         this.open = false;
         console.log('entered', this.selectedTags);
@@ -85,8 +93,8 @@
 
       // When one of the suggestion is clicked
       suggestionClick(index) {
+        this.selectedTags.push({ ...this.matches[index], selected: true });
         this.matches[index].selected = true;
-        this.selectedTags.push({ ...this.matches[index] });
         this.selection = '';
         this.open = false;
         console.log('entered', this.selectedTags);
@@ -125,7 +133,6 @@
               <ul class="dropdown-menu" style="width:100%">
                   <li 
                     v-for="(s, i) in matches"
-                    v-if="!s.selected"
                     :class="{'active': isActive(i)}"
                     @click="suggestionClick(i)"
                   >
