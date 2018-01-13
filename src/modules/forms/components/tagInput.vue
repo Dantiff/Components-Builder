@@ -134,7 +134,7 @@
                   @blur = 'blur'
                   slot="activator"
                 ></v-text-field>
-                <v-list>
+                <v-list class="menu-list">
                   <v-list-tile
                       v-for="(s, i) in matches"
                       :class="{'active': isActive(i)}"
@@ -172,21 +172,25 @@
     .input-group
       .input-group__details
         min-height 0 !important
-    .dropdown-menu
-      margin 0
-      top 50px
-      overflow-y auto
-      overflow-x hidden
-      contain content
-      -webkit-box-shadow 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12)
-      box-shadow 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12)
-      li
-        .active
-          a
-            background-color #99bbff
-        a
-          &:hover, &:focus
-            background-color rgba(0,0,0,.12)
+    .menu
+      width 100%
+  .menu-list
+    padding 2px 0
+    .active
+      a
+        background-color #99bbff
+    li
+      a
+        height unset
+        display block
+        padding 3px 20px
+        clear both
+        font-weight normal
+        font-size 1.1em
+        line-height 1.45
+        color #333333
+        &:hover, &:focus
+          background-color rgba(0,0,0,.12)
     .selected-tags
       .tag
         .chip--label
