@@ -5,7 +5,6 @@
     data() {
       return {
         name: '',
-        email: '',
         select: null,
         items: [
           'Item 1',
@@ -13,7 +12,6 @@
           'Item 3',
           'Item 4',
         ],
-        checkbox: null,
       };
     },
     methods: {
@@ -22,10 +20,48 @@
       },
       clear() {
         this.name = '';
-        this.email = '';
         this.select = null;
-        this.checkbox = null;
         this.$validator.clean();
+      },
+      // When enter pressed on the input
+      enter() {
+        console.log('entered');
+        // this.selection = this.matches[this.current];
+        // this.open = false;
+      },
+
+      // When up pressed while suggestions are open
+      up() {
+        console.log('entered up');
+        // if(this.current > 0)
+        //   this.current--;
+      },
+
+      // When up pressed while suggestions are open
+      down() {
+        console.log('entered down');
+        // if(this.current < this.matches.length - 1)
+        //   this.current++;
+      },
+
+      // For highlighting element
+      isActive(index) {
+        return index === this.current;
+      },
+
+      // When the user changes input
+      change() {
+        console.log('changed');
+        // if (this.open == false) {
+        //   this.open = true;
+        //   this.current = 0;
+        // }
+      },
+
+      // When one of the suggestion is clicked
+      suggestionClick(index) {
+        this.selection = this.matches[index];
+        this.open = false;
       },
     },
   };
@@ -46,34 +82,12 @@
                 v-validate="'required|max:10'"
                 data-vv-name="name"
                 required
+                @keyup.enter = 'enter'
+                @keyup.space = 'enter'
+                @keyup.down = 'down'
+                @keyup.up = 'up'
+                @input = 'change'
               ></v-text-field>
-              <v-text-field
-                v-model="email"
-                label="E-mail"
-                :error-messages="errors.collect('email')"
-                v-validate="'required|email'"
-                data-vv-name="email"
-                required
-              ></v-text-field>
-              <v-select
-                v-bind:items="items"
-                v-model="select"
-                label="Select"
-                :error-messages="errors.collect('select')"
-                v-validate="'required'"
-                data-vv-name="select"
-                required
-              ></v-select>
-              <v-checkbox
-                v-model="checkbox"
-                value="1"
-                label="Option"
-                :error-messages="errors.collect('checkbox')"
-                v-validate="'required'"
-                data-vv-name="checkbox"
-                type="checkbox"
-                required
-              ></v-checkbox>
 
               <v-btn @click="submit">submit</v-btn>
               <v-btn @click="clear">clear</v-btn>
