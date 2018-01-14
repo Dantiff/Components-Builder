@@ -43,8 +43,9 @@
         },
         set(newValue) {
           console.log('new set value', newValue);
-          return newValue;
-          // store.dispatch("CHANGE_MESSAGE", newValue)
+          setTimeout(() => {
+            this.open = newValue;
+          }, 100);
         },
       },
     },
