@@ -1,13 +1,19 @@
 
 <script>
+  
+  import { Compact } from 'vue-color';
 
   export default {
     $validates: true,
+    components: {
+      'compact-picker': Compact,
+    },
     data() {
       return {
         selection: '',
-        open: false,
         current: 0,
+        openSuggestionMenu: false,
+        openTagForm: false,
         suggestions: [
           { name: 'Intoxicating', slug: 'intoxicating', selected: false, color: 'red' },
           { name: 'Life', slug: 'life', selected: false, color: 'blue' },
@@ -16,31 +22,53 @@
           { name: 'Carrier', slug: 'carrier', selected: false, color: 'yellow' },
           { name: 'Dominant', slug: 'dominant', selected: false, color: 'black' },
         ],
+        colors: {
+          hex: '#194d33',
+          hsl: {
+            h: 150,
+            s: 0.5,
+            l: 0.2,
+            a: 1,
+          },
+          hsv: {
+            h: 150,
+            s: 0.66,
+            v: 0.30,
+            a: 1,
+          },
+          rgba: {
+            r: 25,
+            g: 77,
+            b: 51,
+            a: 1,
+          },
+          a: 1,
+        },
       };
     },
     computed: {
-      // Filtering the suggestion based on the input
       matches() {
         // eslint-disable-next-line
         return this.suggestions.filter((s) => {
           return s.name.indexOf(this.selection) >= 0 && !s.selected;
         });
       },
-      // Filtering the matches to get the selected tags
       selectedTags() {
         // eslint-disable-next-line
         return this.suggestions.filter((s) => {
           return s.selected;
         });
       },
-      // The flag for opening suggestions menu
-      openSuggestion: {
+      openFullTagForm() {
+        return this.matches.length === 0 && this.openTagForm === true;
+      },
+      openFullSuggestionMenu: {
         get() {
-          return this.matches.length !== 0 && this.open === true;
+          return this.matches.length !== 0 && this.openSuggestionMenu === true;
         },
         set(newValue) {
           setTimeout(() => {
-            this.open = newValue;
+            this.openSuggestionMenu = newValue;
           }, 100);
         },
       },
@@ -59,14 +87,14 @@
       // When enter pressed on the input
       enter() {
         if (this.matches.length === 0) {
-          console.log('zero matches', this.selection);
-          this.suggestions.push({ name: this.selection, selected: true, color: 'red' });
+          console.log('zero matches on enter', this.selection);
+          this.suggestions.push({ name: this.selection, selected: true, color: '#003300' });
         } else {
           this.matches[this.current].selected = true;
         }
         this.selection = '';
         setTimeout(() => {
-          this.open = false;
+          this.openSuggestionMenu = false;
         }, 100);
       },
 
@@ -93,22 +121,24 @@
 
       // When the user changes input
       change() {
-        if (this.open === false) {
+        if (this.openSuggestionMenu === false) {
           setTimeout(() => {
-            this.open = true;
+            this.openSuggestionMenu = true;
             this.current = 0;
           }, 100);
         }
 
         if (this.matches.length === 0) {
-          console.log('zero matches', this.selection);
+          console.log('zero matches on change', this.selection);
+          this.openTagForm = true;
         }
       },
 
       // When the user leaves input field
       blur() {
         setTimeout(() => {
-          this.open = false;
+          this.openSuggestionMenu = false;
+          this.openTagForm = false;
         }, 100);
       },
 
@@ -117,8 +147,12 @@
         this.matches[index].selected = true;
         this.selection = '';
         setTimeout(() => {
-          this.open = false;
+          this.openSuggestionMenu = false;
         }, 100);
+      },
+      updateValue(val) {
+        console.log('color picker new value', val);
+        this.colors = val;
       },
     },
   };
@@ -133,11 +167,11 @@
             <div 
               style="position:relative" 
               class="tag-input" 
-              :class="{'open':openSuggestion}"
+              :class="{'open':open}"
             >
               <v-menu 
                 offset-y 
-                v-model='openSuggestion'
+                v-model='open'
               >
                 <v-text-field
                   v-model="selection"
@@ -152,7 +186,8 @@
                 ></v-text-field>
                 <v-list 
                   class="menu-list"
-                  :class="{'menu-list-closed':this.matches.length === 0 || !openSuggestion}"
+                  :class="{'menu-list-closed':!openFullSuggestionMenu}"
+                  v-if="openFullSuggestionMenu"
                 >
                   <v-list-tile
                       v-for="(s, i) in matches"
@@ -163,6 +198,16 @@
                     <v-list-tile-title>{{ s.name }}</v-list-tile-title>
                   </v-list-tile>
                 </v-list>
+                <v-list 
+                  class="tag-form"
+                  :class="{'tag-form-closed':!openFullTagForm}"
+                  v-if="!openFullTagForm"
+                >
+                 <v-card-text> 
+                   form open 
+                   <compact-picker :value="colors" @input="updateValue"></compact-picker>
+                 </v-card-text>
+                </v-list>
               </v-menu>
               <div class="selected-tags">
                 <span 
@@ -172,9 +217,9 @@
                   <v-chip 
                     close
                     v-model="t.selected"
-                    :color="t.color"
                     dark
                     label
+                    :style="'background-color:' + t.color + '; border-color:' + t.color"
                   > {{ t.name }} </v-chip>
                 </span>
               </div>

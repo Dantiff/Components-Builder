@@ -39,6 +39,7 @@
     "jquery": "^3.2.1",
     "vee-validate": "^2.0.0-rc.25",
     "vue": "^2.2.6",
+    "vue-color": "^2.4.3",
     "vue-google-autocomplete": "^1.0.13",
     "vue-highcharts": "^0.0.10",
     "vue-i18n": "^6.1.1",
