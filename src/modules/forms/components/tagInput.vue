@@ -33,16 +33,12 @@
           return s.selected;
         });
       },
-      // The flag
-      // openSuggestion() {
-      //   return this.matches.length !== 0 && this.open === true;
-      // },
+      // The flag for opening suggestions menu
       openSuggestion: {
         get() {
           return this.matches.length !== 0 && this.open === true;
         },
         set(newValue) {
-          console.log('new set value', newValue);
           setTimeout(() => {
             this.open = newValue;
           }, 100);
@@ -72,7 +68,6 @@
         setTimeout(() => {
           this.open = false;
         }, 100);
-        console.log('The openSuggestion on enter', this.openSuggestion, this.open);
       },
 
       // When up pressed while suggestions are open
@@ -104,7 +99,7 @@
             this.current = 0;
           }, 100);
         }
-        console.log('changed open', this.openSuggestion, this.open);
+
         if (this.matches.length === 0) {
           console.log('zero matches', this.selection);
         }
@@ -114,9 +109,7 @@
       blur() {
         setTimeout(() => {
           this.open = false;
-          console.log('blurred setTimeout;', this.openSuggestion, this.open);
         }, 100);
-        console.log('blurred', this.openSuggestion, this.open);
       },
 
       // When one of the suggestion is clicked
@@ -126,7 +119,6 @@
         setTimeout(() => {
           this.open = false;
         }, 100);
-        console.log('click opne', this.openSuggestion, this.openSuggestion);
       },
     },
   };
