@@ -62,14 +62,18 @@
       openFullTagForm() {
         return this.matches.length === 0 && this.openTagForm === true;
       },
-      openFullSuggestionMenu: {
+      openFullSuggestionMenu() {
+        return this.matches.length !== 0 && this.openSuggestionMenu === true;
+      },
+      openMenu: {
         get() {
-          return this.matches.length !== 0 && this.openSuggestionMenu === true;
+          return this.openFullSuggestionMenu || this.openFullTagForm;
         },
         set(newValue) {
-          setTimeout(() => {
-            this.openSuggestionMenu = newValue;
-          }, 100);
+          console.log('the new set value', newValue);
+          // setTimeout(() => {
+          //   this.openSuggestionMenu = newValue;
+          // }, 100);
         },
       },
     },
@@ -88,7 +92,7 @@
       enter() {
         if (this.matches.length === 0) {
           console.log('zero matches on enter', this.selection);
-          this.suggestions.push({ name: this.selection, selected: true, color: '#003300' });
+          this.suggestions.push({ name: this.selection, selected: true, color: this.colors.hex });
         } else {
           this.matches[this.current].selected = true;
         }
@@ -138,7 +142,6 @@
       blur() {
         setTimeout(() => {
           this.openSuggestionMenu = false;
-          this.openTagForm = false;
         }, 100);
       },
 
@@ -167,11 +170,13 @@
             <div 
               style="position:relative" 
               class="tag-input" 
-              :class="{'open':open}"
+              :class="{'open':openMenu}"
             >
               <v-menu 
                 offset-y 
-                v-model='open'
+                v-model='openMenu'
+                full-width
+                content-class='tag-input-menu'
               >
                 <v-text-field
                   v-model="selection"
@@ -184,6 +189,8 @@
                   @blur = 'blur'
                   slot="activator"
                 ></v-text-field>
+
+                <!-- List tag suggestions if matches exist -->
                 <v-list 
                   class="menu-list"
                   :class="{'menu-list-closed':!openFullSuggestionMenu}"
@@ -198,17 +205,33 @@
                     <v-list-tile-title>{{ s.name }}</v-list-tile-title>
                   </v-list-tile>
                 </v-list>
+
+                <!-- Create tag if it does not exist -->
                 <v-list 
                   class="tag-form"
                   :class="{'tag-form-closed':!openFullTagForm}"
-                  v-if="!openFullTagForm"
+                  v-if="openFullTagForm"
                 >
-                 <v-card-text> 
-                   form open 
-                   <compact-picker :value="colors" @input="updateValue"></compact-picker>
+                 <v-card-text>
+                    <compact-picker :value="colors" @input="updateValue"></compact-picker>
+
+                    <div class="selection-tag">
+                      <div class="tag" >
+                        <v-icon>local_offer</v-icon>
+                        <v-chip 
+                          close
+                          dark
+                          label
+                          :style="'background-color:' + colors.hex + '; border-color:' + colors.hex"
+                        > {{ selection }} </v-chip>
+                      </div>
+                      <v-btn small color="primary" right dark>Add Tag</v-btn>
+                    </div>
                  </v-card-text>
                 </v-list>
               </v-menu>
+
+              <!-- List of selected tags -->
               <div class="selected-tags">
                 <span 
                   v-for="(t, i) in selectedTags"
@@ -253,23 +276,56 @@
             margin 0 2px 0 2px
             .icon
               font-size 13px
-  .menu-list-closed
-    display none
-  .menu-list
-    padding 2px 0
-    .active
-      a
-        background-color #99bbff
-    li
-      a
-        height unset
-        display block
-        padding 3px 20px
-        clear both
-        font-weight normal
-        font-size 1.1em
-        line-height 1.45
-        color #333333
-        &:hover, &:focus
-          background-color rgba(0,0,0,.12)
+  .tag-input-menu
+    max-width 300px !important
+    width 100%
+    .menu-list-closed
+      display none
+    .menu-list
+      padding 2px 0
+      .active
+        a
+          background-color #99bbff
+      li
+        a
+          height unset
+          display block
+          padding 3px 20px
+          clear both
+          font-weight normal
+          font-size 1.1em
+          line-height 1.45
+          color #333333
+          &:hover, &:focus
+            background-color rgba(0,0,0,.12)
+    .tag-form-closed
+      display none
+    .tag-form
+      .card__text
+        padding-top 0
+      .vc-compact
+        width 100%
+      .selection-tag
+        padding-top 10px
+        display flex
+        .icon
+          font-size 1.2em
+        .tag
+          padding-top 8px
+          .chip--label
+            border-radius 5px
+          .chip__content
+            color #ffffff
+            height 16px
+            padding 0 0px 0 5px
+            font-size 12.5px
+            font-weight 400
+            border-radius 4px
+            .chip__close
+              margin 0 2px 0 2px
+              .icon
+                font-size 13px
+        button
+          right 8px
+          position absolute
 </style>
