@@ -8,7 +8,6 @@
         selection: '',
         open: false,
         current: 0,
-        openSuggestion: false,
         suggestions: [
           { name: 'Intoxicating', slug: 'intoxicating', selected: false, color: 'red' },
           { name: 'Life', slug: 'life', selected: false, color: 'blue' },
@@ -35,8 +34,18 @@
         });
       },
       // The flag
-      openSuggestion() {
-        return this.matches.length !== 0 && this.open === true;
+      // openSuggestion() {
+      //   return this.matches.length !== 0 && this.open === true;
+      // },
+      openSuggestion: {
+        get() {
+          return this.matches.length !== 0 && this.open === true;
+        },
+        set(newValue) {
+          console.log('new set value', newValue);
+          return newValue;
+          // store.dispatch("CHANGE_MESSAGE", newValue)
+        },
       },
     },
     watch: {
@@ -55,11 +64,14 @@
         if (this.matches.length === 0) {
           console.log('zero matches', this.selection);
           this.suggestions.push({ name: this.selection, selected: true, color: 'red' });
+        } else {
+          this.matches[this.current].selected = true;
         }
-
-        this.matches[this.current].selected = true;
         this.selection = '';
-        this.open = false;
+        setTimeout(() => {
+          this.open = false;
+        }, 100);
+        console.log('The openSuggestion on enter', this.openSuggestion, this.open);
       },
 
       // When up pressed while suggestions are open
@@ -85,11 +97,13 @@
 
       // When the user changes input
       change() {
-        console.log('changed');
         if (this.open === false) {
-          this.open = true;
-          this.current = 0;
+          setTimeout(() => {
+            this.open = true;
+            this.current = 0;
+          }, 100);
         }
+        console.log('changed open', this.openSuggestion, this.open);
         if (this.matches.length === 0) {
           console.log('zero matches', this.selection);
         }
@@ -99,15 +113,19 @@
       blur() {
         setTimeout(() => {
           this.open = false;
-        }, 50);
+          console.log('blurred setTimeout;', this.openSuggestion, this.open);
+        }, 100);
+        console.log('blurred', this.openSuggestion, this.open);
       },
 
       // When one of the suggestion is clicked
       suggestionClick(index) {
         this.matches[index].selected = true;
         this.selection = '';
-        this.open = false;
-        console.log('entered', this.selectedTags);
+        setTimeout(() => {
+          this.open = false;
+        }, 100);
+        console.log('click opne', this.openSuggestion, this.openSuggestion);
       },
     },
   };
@@ -124,7 +142,10 @@
               class="tag-input" 
               :class="{'open':openSuggestion}"
             >
-              <v-menu offset-y v-model='openSuggestion'>
+              <v-menu 
+                offset-y 
+                v-model='openSuggestion'
+              >
                 <v-text-field
                   v-model="selection"
                   label="Add Tag"
@@ -138,7 +159,7 @@
                 ></v-text-field>
                 <v-list 
                   class="menu-list"
-                  :class="{'menu-list-closed':this.matches.length === 0}"
+                  :class="{'menu-list-closed':this.matches.length === 0 || !openSuggestion}"
                 >
                   <v-list-tile
                       v-for="(s, i) in matches"
