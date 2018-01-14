@@ -49,15 +49,17 @@
     computed: {
       matches() {
         // eslint-disable-next-line
-        return this.suggestions.filter((s) => {
+        const newArr = this.suggestions.filter((s) => {
           return s.name.indexOf(this.selection) >= 0 && !s.selected;
         });
+        return newArr.sort(this.sortTags());
       },
       selectedTags() {
         // eslint-disable-next-line
-        return this.suggestions.filter((s) => {
+        const newArr = this.suggestions.filter((s) => {
           return s.selected;
         });
+        return newArr.sort(this.sortTags());
       },
       openFullTagForm() {
         return this.matches.length === 0 && this.openTagForm === true;
@@ -92,7 +94,12 @@
       enter() {
         if (this.matches.length === 0) {
           console.log('zero matches on enter', this.selection);
-          this.suggestions.push({ name: this.selection, selected: true, color: this.colors.hex });
+          this.suggestions.push({
+            name: this.selection,
+            slug: this.selection.replace(/ /g, '_'),
+            selected: true,
+            color: this.colors.hex,
+          });
         } else {
           this.matches[this.current].selected = true;
         }
@@ -155,7 +162,41 @@
       },
       updateValue(val) {
         console.log('color picker new value', val);
+        this.openTagForm = true;
         this.colors = val;
+      },
+      sortTags() {
+        const reA = /[^a-zA-Z]/g;
+        const reN = /[^0-9]/g;
+        const sortAlphaNum = (c, d) => {
+          const a = c.name;
+          const b = d.name;
+          const AInt = parseInt(a, 10);
+          const BInt = parseInt(b, 10);
+          console.log('sorter', a, b);
+
+          if (isNaN(AInt) && isNaN(BInt)) {
+            const aA = a.replace(reA, '');
+            const bA = b.replace(reA, '');
+            if (aA === bA) {
+              const aN = parseInt(a.replace(reN, ''), 10);
+              const bN = parseInt(b.replace(reN, ''), 10);
+              // eslint-disable-next-line
+              return aN === bN ? 0 : aN > bN ? 1 : -1;
+            // eslint-disable-next-line
+            } else {
+              return aA > bA ? 1 : -1;
+            }
+          } else if (isNaN(AInt)) {
+            return 1;
+          } else if (isNaN(BInt)) {
+            return -1;
+          // eslint-disable-next-line
+          } else {
+            return AInt > BInt ? 1 : -1;
+          }
+        };
+        return sortAlphaNum;
       },
     },
   };
