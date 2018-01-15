@@ -68,16 +68,6 @@
         },
       },
     },
-    watch: {
-      matches: {
-        handler() {
-          if (this.matches.length === 0) {
-            // console.log('zero matches', this.matches);
-          }
-        },
-        deep: true,
-      },
-    },
     methods: {
       // When enter pressed on the input
       enter() {
@@ -107,6 +97,7 @@
         }
         this.selection = '';
         this.openSuggestionMenu = false;
+        this.openTagForm = false;
       },
 
       // When up pressed while suggestions are open
@@ -137,7 +128,7 @@
           this.openSuggestionMenu = true;
           this.current = 0;
         }
-        if (this.matches.length === 0) {
+        if (this.matches.length === 0 && this.selection !== '') {
           this.openSuggestionMenu = false;
           this.openTagForm = true;
         }
