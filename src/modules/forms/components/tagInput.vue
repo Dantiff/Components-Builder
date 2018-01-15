@@ -15,6 +15,8 @@
         current: 0,
         openSuggestionMenu: false,
         openTagForm: false,
+        editingTag: false,
+        selectedTag: {},
         suggestions: [
           { name: 'Intoxicating', slug: 'intoxicating', selected: false, color: 'red' },
           { name: 'Life', slug: 'life', selected: false, color: 'blue' },
@@ -25,25 +27,6 @@
         ],
         colors: {
           hex: '#194d33',
-          hsl: {
-            h: 150,
-            s: 0.5,
-            l: 0.2,
-            a: 1,
-          },
-          hsv: {
-            h: 150,
-            s: 0.66,
-            v: 0.30,
-            a: 1,
-          },
-          rgba: {
-            r: 25,
-            g: 77,
-            b: 51,
-            a: 1,
-          },
-          a: 1,
         },
       };
     },
@@ -93,7 +76,12 @@
     methods: {
       // When enter pressed on the input
       enter() {
-        if (this.matches.length === 0) {
+        // eslint-disable-next-line
+        const filter = this.suggestions.filter((s) => {
+          return s.name.indexOf(this.selection) >= 0;
+        });
+
+        if (this.matches.length === 0 && filter.length === 0 && !this.editingTag) {
           console.log('zero matches on enter', this.selection);
           this.suggestions.push({
             name: this.selection,
@@ -101,8 +89,17 @@
             selected: true,
             color: this.colors.hex,
           });
-        } else {
+        } else if (this.matches.length !== 0 && !this.editingTag) {
           this.matches[this.current].selected = true;
+        } else if (this.editingTag) {
+          this.suggestions = this.suggestions.map((s) => {
+            if (s.slug === this.selectedTag.slug) {
+              s.name = this.selection;
+              s.slug = this.selection.replace(/ /g, '_');
+              s.color = this.colors.hex;
+            }
+            return s;
+          });
         }
         this.selection = '';
         this.openSuggestionMenu = false;
@@ -144,10 +141,9 @@
 
       // When the user leaves input field
       blur() {
-        setTimeout(() => {
-          this.openSuggestionMenu = false;
-          // this.selection = '';
-        }, 100);
+        if (!this.openMenu) {
+          this.selection = '';
+        }
       },
 
       // When one of the suggestion is clicked
@@ -159,8 +155,11 @@
 
       // Begin editing tag
       editTag(t) {
+        this.editingTag = true;
+        this.selectedTag = { ...t };
         this.selection = t.name;
         this.$refs.tagInputBox.focus();
+        this.colors.hex = t.color;
       },
 
       updateColor(val) {
@@ -285,7 +284,7 @@
                         right 
                         dark
                         @click="enter"
-                      >Add Tag</v-btn>
+                      > {{ this.editingTag ? 'Update Tag' : 'Add Tag' }} </v-btn>
                     </div>
                  </v-card-text>
                 </v-list>
