@@ -247,14 +247,13 @@
                 :position-y="tagInputBoxY + 4"
                 v-model='openMenu'
                 content-class='tag-input-menu'
-                :style="'min-width:' + tagInputBoxWidth + 'px'"
+                :nudge-width="tagInputBoxWidth"
               >
                 <!-- List tag suggestions if matches exist -->
                 <v-list 
                   class="menu-list"
                   :class="{'menu-list-closed':!openFullSuggestionMenu}"
                   v-if="openFullSuggestionMenu"
-                  :style="'min-width:' + tagInputBoxWidth + 'px'"
                 >
                   <v-list-tile
                       v-for="(s, i) in matches"
