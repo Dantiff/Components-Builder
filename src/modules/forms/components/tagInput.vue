@@ -56,9 +56,14 @@
           return this.openFullSuggestionMenu || this.openFullTagForm;
         },
         set(newValue) {
-          console.log('the new set value', newValue);
+          console.log('the new set value', newValue, this.openFullSuggestionMenu, this.openFullTagForm);
           this.$nextTick(() => {
             this.openSuggestionMenu = newValue;
+            if (!newValue) {
+              this.selection = '';
+              this.editingTag = false;
+              this.selectedTag = {};
+            }
           });
         },
       },
@@ -82,7 +87,6 @@
         });
 
         if (this.matches.length === 0 && filter.length === 0 && !this.editingTag) {
-          console.log('zero matches on enter', this.selection);
           this.suggestions.push({
             name: this.selection,
             slug: this.selection.replace(/ /g, '_'),
@@ -128,7 +132,7 @@
 
       // When the user changes input
       change() {
-        if (this.openSuggestionMenu === false && this.matches.length !== 0) {
+        if (this.matches.length !== 0) {
           this.openTagForm = false;
           this.openSuggestionMenu = true;
           this.current = 0;
@@ -136,13 +140,6 @@
         if (this.matches.length === 0) {
           this.openSuggestionMenu = false;
           this.openTagForm = true;
-        }
-      },
-
-      // When the user leaves input field
-      blur() {
-        if (!this.openMenu) {
-          this.selection = '';
         }
       },
 
@@ -163,7 +160,6 @@
       },
 
       updateColor(val) {
-        console.log('color picker new value', val);
         this.openTagForm = true;
         this.colors = val;
       },
@@ -229,7 +225,6 @@
                 @input = 'change'
                 @focus = 'change'
                 @click = 'change'
-                @blur = 'blur'
               ></v-text-field>
 
               <!-- Popup context -->
@@ -255,7 +250,13 @@
                       :key='i'
                       @click="suggestionClick(i)"
                   >
-                    <v-list-tile-title>{{ s.name }}</v-list-tile-title>
+                    <v-list-tile-title>
+                    <v-chip
+                      dark
+                      :style="'background-color:' + s.color + '; border-color:' + s.color"
+                    ></v-chip>
+                      {{ s.name }}
+                    </v-list-tile-title>
                   </v-list-tile>
                 </v-list>
 
@@ -356,6 +357,11 @@
           color #333333
           &:hover, &:focus
             background-color rgba(0,0,0,.12)
+        .chip
+          height 15px
+          width 15px
+          border 3px solid rgba(0,0,0,0.2) !important
+          opacity 0.8
     .tag-form-closed
       display none
     .tag-form
