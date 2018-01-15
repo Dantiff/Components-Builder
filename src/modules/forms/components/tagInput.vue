@@ -10,6 +10,9 @@
     },
     data() {
       return {
+        tagInputBoxX: 0,
+        tagInputBoxY: 0,
+        tagInputBoxWidth: 0,
         selection: '',
         current: 0,
         openSuggestionMenu: false,
@@ -73,9 +76,9 @@
         },
         set(newValue) {
           console.log('the new set value', newValue);
-          // setTimeout(() => {
-          //   this.openSuggestionMenu = newValue;
-          // }, 100);
+          setTimeout(() => {
+            this.openSuggestionMenu = newValue;
+          }, 100);
         },
       },
     },
@@ -199,6 +202,14 @@
         return sortAlphaNum;
       },
     },
+    mounted() {
+      console.log('mounted', this.$refs);
+      const tagInputBox = this.$refs.tagInputBox.$refs.input.getBoundingClientRect();
+      this.tagInputBoxX = tagInputBox.left;
+      this.tagInputBoxY = tagInputBox.bottom;
+      this.tagInputBoxWidth = tagInputBox.right - tagInputBox.left;
+      console.log(this.tagInputBoxWidth);
+    },
   };
 </script>
 
@@ -213,29 +224,37 @@
               class="tag-input" 
               :class="{'open':openMenu}"
             >
-              <v-menu 
-                offset-y 
-                v-model='openMenu'
-                full-width
-                content-class='tag-input-menu'
-              >
-                <v-text-field
-                  v-model="selection"
-                  label="Add Tag"
-                  @keyup.enter = 'enter'
-                  @keyup.down = 'down'
-                  @keyup.up = 'up'
-                  @input = 'change'
-                  @focus = 'change'
-                  @blur = 'blur'
-                  slot="activator"
-                ></v-text-field>
+              <!-- The input field -->
+              <v-text-field
+                v-model="selection"
+                label="Add Tag"
+                ref="tagInputBox"
+                hideDetails
+                @keyup.enter = 'enter'
+                @keyup.down = 'down'
+                @keyup.up = 'up'
+                @input = 'change'
+                @focus = 'change'
+                @blur = 'blur'
+              ></v-text-field>
 
+              <!-- Popup context -->
+              <v-menu 
+                full-width
+                absolute 
+                :close-on-content-click="false"
+                :position-x="tagInputBoxX" 
+                :position-y="tagInputBoxY + 4"
+                v-model='openMenu'
+                content-class='tag-input-menu'
+                :style="'min-width:' + tagInputBoxWidth + 'px'"
+              >
                 <!-- List tag suggestions if matches exist -->
                 <v-list 
                   class="menu-list"
                   :class="{'menu-list-closed':!openFullSuggestionMenu}"
                   v-if="openFullSuggestionMenu"
+                  :style="'min-width:' + tagInputBoxWidth + 'px'"
                 >
                   <v-list-tile
                       v-for="(s, i) in matches"
@@ -297,9 +316,6 @@
 
 <style lang='stylus'>
   .tag-input
-    .input-group
-      .input-group__details
-        min-height 0 !important
     .menu
       width 100%
     .selected-tags
