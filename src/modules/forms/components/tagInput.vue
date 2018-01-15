@@ -235,6 +235,7 @@
                 @keyup.up = 'up'
                 @input = 'change'
                 @focus = 'change'
+                @click = 'change'
                 @blur = 'blur'
               ></v-text-field>
 
@@ -284,7 +285,13 @@
                           :style="'background-color:' + colors.hex + '; border-color:' + colors.hex"
                         > {{ selection }} </v-chip>
                       </div>
-                      <v-btn small color="primary" right dark>Add Tag</v-btn>
+                      <v-btn 
+                        small 
+                        color="primary" 
+                        right 
+                        dark
+                        @click="enter"
+                      >Add Tag</v-btn>
                     </div>
                  </v-card-text>
                 </v-list>
