@@ -10,9 +10,7 @@
     },
     data() {
       return {
-        tagInputBoxX: 0,
-        tagInputBoxY: 0,
-        tagInputBoxWidth: 0,
+        tagInputBox: 0,
         selection: '',
         current: 0,
         openSuggestionMenu: false,
@@ -76,9 +74,9 @@
         },
         set(newValue) {
           console.log('the new set value', newValue);
-          setTimeout(() => {
+          this.$nextTick(() => {
             this.openSuggestionMenu = newValue;
-          }, 100);
+          });
         },
       },
     },
@@ -107,9 +105,7 @@
           this.matches[this.current].selected = true;
         }
         this.selection = '';
-        setTimeout(() => {
-          this.openSuggestionMenu = false;
-        }, 100);
+        this.openSuggestionMenu = false;
       },
 
       // When up pressed while suggestions are open
@@ -135,15 +131,13 @@
 
       // When the user changes input
       change() {
-        if (this.openSuggestionMenu === false) {
-          setTimeout(() => {
-            this.openSuggestionMenu = true;
-            this.current = 0;
-          }, 100);
+        if (this.openSuggestionMenu === false && this.matches.length !== 0) {
+          this.openTagForm = false;
+          this.openSuggestionMenu = true;
+          this.current = 0;
         }
-
         if (this.matches.length === 0) {
-          console.log('zero matches on change', this.selection);
+          this.openSuggestionMenu = false;
           this.openTagForm = true;
         }
       },
@@ -152,6 +146,7 @@
       blur() {
         setTimeout(() => {
           this.openSuggestionMenu = false;
+          // this.selection = '';
         }, 100);
       },
 
@@ -159,11 +154,16 @@
       suggestionClick(index) {
         this.matches[index].selected = true;
         this.selection = '';
-        setTimeout(() => {
-          this.openSuggestionMenu = false;
-        }, 100);
+        this.openSuggestionMenu = false;
       },
-      updateValue(val) {
+
+      // Begin editing tag
+      editTag(t) {
+        this.selection = t.name;
+        this.$refs.tagInputBox.focus();
+      },
+
+      updateColor(val) {
         console.log('color picker new value', val);
         this.openTagForm = true;
         this.colors = val;
@@ -176,7 +176,6 @@
           const b = d.name;
           const AInt = parseInt(a, 10);
           const BInt = parseInt(b, 10);
-          console.log('sorter', a, b);
 
           if (isNaN(AInt) && isNaN(BInt)) {
             const aA = a.replace(reA, '');
@@ -203,12 +202,7 @@
       },
     },
     mounted() {
-      console.log('mounted', this.$refs);
-      const tagInputBox = this.$refs.tagInputBox.$refs.input.getBoundingClientRect();
-      this.tagInputBoxX = tagInputBox.left;
-      this.tagInputBoxY = tagInputBox.bottom;
-      this.tagInputBoxWidth = tagInputBox.right - tagInputBox.left;
-      console.log(this.tagInputBoxWidth);
+      this.tagInputBox = this.$refs.tagInputBox.$refs.input.getBoundingClientRect();
     },
   };
 </script>
@@ -244,11 +238,11 @@
                 full-width
                 absolute 
                 :close-on-content-click="false"
-                :position-x="tagInputBoxX" 
-                :position-y="tagInputBoxY + 4"
+                :position-x="tagInputBox.left" 
+                :position-y="tagInputBox.bottom + 4"
                 v-model='openMenu'
                 content-class='tag-input-menu'
-                :nudge-width="tagInputBoxWidth"
+                :nudge-width="tagInputBox.right - tagInputBox.left"
               >
                 <!-- List tag suggestions if matches exist -->
                 <v-list 
@@ -273,7 +267,7 @@
                   v-if="openFullTagForm"
                 >
                  <v-card-text>
-                    <compact-picker :value="colors" @input="updateValue"></compact-picker>
+                    <compact-picker :value="colors" @input="updateColor"></compact-picker>
 
                     <div class="selection-tag">
                       <div class="tag" >
@@ -309,7 +303,9 @@
                     dark
                     label
                     :style="'background-color:' + t.color + '; border-color:' + t.color"
-                  > {{ t.name }} </v-chip>
+                  > 
+                    <span @click="editTag(t)"> {{ t.name }} </span>
+                  </v-chip>
                 </span>
               </div>
             </div>
