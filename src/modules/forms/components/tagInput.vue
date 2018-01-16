@@ -9,14 +9,15 @@
     data() {
       return {
         suggestions: [
-          { name: 'Intoxicating', slug: 'intoxicating', selected: false, color: 'red' },
-          { name: 'Life', slug: 'life', selected: false, color: 'blue' },
-          { name: 'Command', slug: 'command', selected: false, color: 'grey' },
-          { name: 'Intense', slug: 'intense', selected: false, color: 'orange' },
-          { name: 'Carrier', slug: 'carrier', selected: false, color: 'yellow' },
-          { name: 'Dominant', slug: 'dominant', selected: false, color: 'black' },
+          { name: 'Intoxicating', selected: false, color: 'red' },
+          { name: 'Life', selected: false, color: 'blue' },
+          { name: 'Command', selected: false, color: 'grey' },
+          { name: 'Intense', selected: false, color: 'orange' },
+          { name: 'Carrier', selected: false, color: 'yellow' },
+          { name: 'Dominant', selected: false, color: 'black' },
         ],
         canCreateTags: true,
+        selection: '',
       };
     },
   };

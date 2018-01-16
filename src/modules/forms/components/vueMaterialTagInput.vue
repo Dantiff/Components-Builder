@@ -13,6 +13,14 @@
     '#808900', '#194D33', '#0C797D', '#0062B1', '#653294', '#AB149E',
   ];
   const dColor = '#194d33';
+  const dSuggestions = [
+    { name: 'Intoxicating', selected: false, color: 'red' },
+    { name: 'Life', selected: false, color: 'blue' },
+    { name: 'Command', selected: false, color: 'grey' },
+    { name: 'Intense', selected: false, color: 'orange' },
+    { name: 'Carrier', selected: false, color: 'yellow' },
+    { name: 'Dominant', selected: false, color: 'black' },
+  ];
 
   export default {
     components: {
@@ -33,8 +41,19 @@
       },
       suggestions: {
         type: Array,
+        default() {
+          return dSuggestions;
+        },
         required: true,
       },
+      // selection: {
+      //   type: String,
+      //   default() {
+      //     return dSelection;
+      //   },
+      //   required: true,
+      //   twoWay: true,
+      // },
       canCreateTags: {
         type: Boolean,
         default() {
@@ -281,7 +300,6 @@
       >
        <v-card-text>
           <compact-picker :value="colors" @input="updateColor" :palette='palette'></compact-picker>
-
           <div class="selection-tag">
             <div class="tag" >
               <v-icon>local_offer</v-icon>
