@@ -21,6 +21,7 @@
     { name: 'Carrier', selected: false, color: 'yellow' },
     { name: 'Dominant', selected: false, color: 'black' },
   ];
+  const dPlaceholder = 'Add Tag';
 
   export default {
     components: {
@@ -58,6 +59,12 @@
         type: Boolean,
         default() {
           return false;
+        },
+      },
+      placeholder: {
+        type: String,
+        default() {
+          return dPlaceholder;
         },
       },
     },
@@ -189,11 +196,13 @@
 
       // Begin editing tag
       editTag(t) {
-        this.editingTag = true;
-        this.selectedTag = { ...t };
-        this.selection = t.name;
-        this.$refs.tagInputBox.focus();
-        this.colors.hex = t.color;
+        if (this.canCreateTags) {
+          this.editingTag = true;
+          this.selectedTag = { ...t };
+          this.selection = t.name;
+          this.$refs.tagInputBox.focus();
+          this.colors.hex = t.color;
+        }
       },
 
       updateColor(val) {
@@ -248,7 +257,7 @@
     <!-- The input field -->
     <v-text-field
       v-model="selection"
-      label="Add Tag"
+      :label="placeholder"
       ref="tagInputBox"
       hideDetails
       @keyup.enter = 'enter'
@@ -351,6 +360,7 @@
         .chip--label
           border-radius 5px
         .chip__content
+          cursor pointer
           color #ffffff
           height 16px
           padding 0 0px 0 5px
