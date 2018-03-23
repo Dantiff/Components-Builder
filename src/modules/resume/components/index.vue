@@ -26,12 +26,12 @@
             <v-layout row wrap>
               <v-flex xs12 lg12>
                 <v-expansion-panel popout>
-                  <v-expansion-panel-content v-for="(r,i) in resumes" :key="i">
+                  <v-expansion-panel-content v-for="(res,i) in resumes" :key="i">
                     <div slot="header">
-                      <h4> {{ resume.title }} </h4>
-                      <p> {{ resume.text }} </p>
+                      <h4> {{ res.title }} </h4>
+                      <p> {{ res.text }} </p>
                     </div>
-                    <v-card v-for="(r,i) in resume.resumes" :key="i">
+                    <v-card v-for="(r,i) in res.resumes" :key="i">
                       <v-card-text class="grey lighten-3">
                         <blockquote>
                           <router-link :to="r.link"> {{ r.title }} </router-link>
