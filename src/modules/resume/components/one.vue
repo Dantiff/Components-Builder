@@ -65,11 +65,11 @@ export default {
           <v-card-text>
             <v-btn primary @click="printResume"> Print Resume </v-btn>
 
-            <div v-html="one"></div>
+            <div v-html="one" ref="creatorContent"></div>
 
 
 
-
+<!-- 
             <div id="previewAndCustomize" class="section-content" style="" data-section="preview">
     <div class="section-content__wrapp">
 
@@ -405,7 +405,7 @@ export default {
         </div>
     </div>
 </div>
-
+ -->
 
 
           </v-card-text>
