@@ -118,6 +118,24 @@ export default [
     },
   },
 
+  // Resumes
+  {
+    path: '/resume',
+    name: 'resume.index',
+    component: require('@/modules/resume/components/index.vue'),
+    meta: {
+      auth: true,
+    },
+  },
+  {
+    path: '/resume/sample-one',
+    name: 'resume.one',
+    component: require('@/modules/resume/components/one.vue'),
+    meta: {
+      auth: true,
+    },
+  },
+
   {
     path: '/',
     redirect: '/home',
