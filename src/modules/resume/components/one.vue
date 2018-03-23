@@ -1,12 +1,55 @@
 
 <script>
-  export default {
-    data() {
-      return {};
+import jsPDF from 'jspdf';
+// import * as rasterizeHTML from 'rasterizehtml';
+
+export default {
+  data() {
+    return {};
+  },
+  description: 'The very 1st sample of a resume',
+  methods: {
+    printResume() {
+      // eslint-disable-next-line
+      // const doc = new jsPDF();
+      // const canvas = document.getElementById('creatorContainer');
+      // rasterizeHTML.drawHTML(this.$refs.creatorContent, canvas);
+      // doc.addHTML(canvas, 10, 10);
+      // doc.save('SampleResume.pdf');
+      const margins = {
+        top: 15,
+        bottom: 10,
+        left: 10,
+        width: 550,
+      };
+
+      const headerFooterFormatting = (doc) => {
+        const totalPages = doc.internal.getNumberOfPages();
+
+        // eslint-disable-next-line
+        for(let i = totalPages; i >= 1; i--) {
+          doc.setPage(i);
+          // header(doc);
+          // footer(doc, i, totalPages);
+        }
+      };
+
+      // eslint-disable-next-line
+      const pdf = new jsPDF('p', 'pt', 'a4');
+      pdf.setFontSize(10);
+      pdf.fromHTML(this.$refs.creatorContent,
+        margins.left,
+        margins.top,
+        {
+          // width: margins.width,
+        }, () => {
+          headerFooterFormatting(pdf);
+        },
+        margins);
+      pdf.save('SampleResume.pdf');
     },
-    description: 'The very 1st sample of a resume',
-    methods: {},
-  };
+  },
+};
 </script>
 
 <template>
@@ -15,6 +58,7 @@
       <v-layout row wrap>
         <v-flex xs12 lg12>
           <v-card-text>
+            <v-btn primary @click="printResume"> Print Resume </v-btn>
 
 
 
@@ -22,8 +66,8 @@
             <div id="previewAndCustomize" class="section-content" style="" data-section="preview">
     <div class="section-content__wrapp">
 
-        <div class="c-document" id="creatorContainer" style="width: 839px; height: 1190px;">
-            <div class="c-document__content" id="creatorContent" style="transform: scale(0.85); height: 1190px;">      <div class="page fFamilyTxtRobotoCondensed fStyleH1Bold fStyleH1LastBold fStyleH3Bold fStyleH5Bold fStylePersonalTitleBold pagePaddingTop30 pagePaddingRight30 pagePaddingBottom30 pagePaddingLeft30 secSpace20 colSpace20 lineHeight-2 fSizeH1-2 fSizeH2-2 fSizeH3-2 fSizeH4-2 fSizeH5-2 fSizeH6-2 fSizeText-2 fSizeDate-2 fSizeSkillDesc-2 fSizePersonalTitle-2 fSizePersonalText-2 fSizeHeader-2 fSizeFooter-2 hasFooterTrue pageSplitted" data-template="6" data-id="b13020be-e282-430c-b9a2-7fc4ffcb0144" data-user-id="1716780" data-colorset="248" data-language="en_EN" data-type="cv" data-name="My resume" data-first-name="Daniel" data-last-name="Mburu"><div class="dRow firstRow lastRow" style="height: 1400px;"><div class="dCol secTitMarginBottom10 secAccIcoCircle colSpecialLineOn colSpecialBorderPrimoOn dateLinesDouble dateSeparatorDash dateStickSeparatorFrom colorTxtMediumBlack3 colorNameDarkSilver2 colorLastNameDarkSilver2 colorPositionDarkSilver2 colorImgBrdDarkSilver2 colorImgBgDarkSilver2 colorSecTitDarkSilver2 colorSecTitBgWhite3 colorSecTitBrdLightSilver3 colorSecLineLightSilver3 colorSecPointDarkSilver2 colorSecPointShadowDarkSilver1 colorEntTitMediumBlack3 colorEntSubMediumBlack3 colorEntBoldMediumBlack3 colorEntIcoWhite3 colorEntIcoBgDarkSilver3 colorIcoWhite3 colorIcoBgDarkSilver3 colorRatOnDarkSilver3 colorRatOffLightSilver3 colorRatAddDarkSilver3 colorBgWhite3 colorBgHfWhite3 colorDateMediumBlack3 colorDateBgDarkSilver2 firstCol" style="width: 69%; height: 1400px;"><div class="section sectionType1 sectionBasic secType1AccCircle secSpecialLineOff fStyleH1Bold fStyleH1LastBold existingSection">
+        <div class="c-document" id="creatorContainer" style="width: 600px; height: 1190px;">
+            <div class="c-document__content" id="creatorContent" ref="creatorContent" style="transform: scale(0.85); height: 1190px;">      <div class="page fFamilyTxtRobotoCondensed fStyleH1Bold fStyleH1LastBold fStyleH3Bold fStyleH5Bold fStylePersonalTitleBold pagePaddingTop30 pagePaddingRight30 pagePaddingBottom30 pagePaddingLeft30 secSpace20 colSpace20 lineHeight-2 fSizeH1-2 fSizeH2-2 fSizeH3-2 fSizeH4-2 fSizeH5-2 fSizeH6-2 fSizeText-2 fSizeDate-2 fSizeSkillDesc-2 fSizePersonalTitle-2 fSizePersonalText-2 fSizeHeader-2 fSizeFooter-2 hasFooterTrue pageSplitted" data-template="6" data-id="b13020be-e282-430c-b9a2-7fc4ffcb0144" data-user-id="1716780" data-colorset="248" data-language="en_EN" data-type="cv" data-name="My resume" data-first-name="Daniel" data-last-name="Mburu"><div class="dRow firstRow lastRow" style="height: 1400px;"><div class="dCol secTitMarginBottom10 secAccIcoCircle colSpecialLineOn colSpecialBorderPrimoOn dateLinesDouble dateSeparatorDash dateStickSeparatorFrom colorTxtMediumBlack3 colorNameDarkSilver2 colorLastNameDarkSilver2 colorPositionDarkSilver2 colorImgBrdDarkSilver2 colorImgBgDarkSilver2 colorSecTitDarkSilver2 colorSecTitBgWhite3 colorSecTitBrdLightSilver3 colorSecLineLightSilver3 colorSecPointDarkSilver2 colorSecPointShadowDarkSilver1 colorEntTitMediumBlack3 colorEntSubMediumBlack3 colorEntBoldMediumBlack3 colorEntIcoWhite3 colorEntIcoBgDarkSilver3 colorIcoWhite3 colorIcoBgDarkSilver3 colorRatOnDarkSilver3 colorRatOffLightSilver3 colorRatAddDarkSilver3 colorBgWhite3 colorBgHfWhite3 colorDateMediumBlack3 colorDateBgDarkSilver2 firstCol" style="width: 69%; height: 1400px;"><div class="section sectionType1 sectionBasic secType1AccCircle secSpecialLineOff fStyleH1Bold fStyleH1LastBold existingSection">
     <div class="entry existingEntry">
       <div class="secType1Acc">
         <div class="secType1AccInitials">dm</div>
