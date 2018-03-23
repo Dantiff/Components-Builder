@@ -3,9 +3,14 @@
 import jsPDF from 'jspdf';
 // import * as rasterizeHTML from 'rasterizehtml';
 
+// eslint-disable-next-line
+const one = require('html-loader!./one.html');
+
 export default {
   data() {
-    return {};
+    return {
+      one,
+    };
   },
   description: 'The very 1st sample of a resume',
   methods: {
@@ -59,6 +64,8 @@ export default {
         <v-flex xs12 lg12>
           <v-card-text>
             <v-btn primary @click="printResume"> Print Resume </v-btn>
+
+            <div v-html="one"></div>
 
 
 
