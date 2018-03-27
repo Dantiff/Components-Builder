@@ -5,6 +5,7 @@ import jsPDF from 'jspdf';
 
 // eslint-disable-next-line
 const one = require('html-loader!./one.html');
+const inlineCss = require('inline-css');
 
 export default {
   data() {
@@ -39,19 +40,38 @@ export default {
         }
       };
 
+      inlineCss(one, {})
+          .then((html) => {
+            console.log(html);
+
+            // eslint-disable-next-line
+            const pdf = new jsPDF('p', 'pt', 'a4');
+            pdf.setFontSize(10);
+            pdf.fromHTML(html,
+              margins.left,
+              margins.top,
+              {
+                // width: margins.width,
+              }, () => {
+                headerFooterFormatting(pdf);
+              },
+              margins);
+            pdf.save('SampleResume.pdf');
+          });
+
       // eslint-disable-next-line
-      const pdf = new jsPDF('p', 'pt', 'a4');
-      pdf.setFontSize(10);
-      pdf.fromHTML(this.$refs.creatorContent,
-        margins.left,
-        margins.top,
-        {
-          // width: margins.width,
-        }, () => {
-          headerFooterFormatting(pdf);
-        },
-        margins);
-      pdf.save('SampleResume.pdf');
+      // const pdf = new jsPDF('p', 'pt', 'a4');
+      // pdf.setFontSize(10);
+      // pdf.fromHTML(this.$refs.creatorContent,
+      //   margins.left,
+      //   margins.top,
+      //   {
+      //     // width: margins.width,
+      //   }, () => {
+      //     headerFooterFormatting(pdf);
+      //   },
+      //   margins);
+      // pdf.save('SampleResume.pdf');
     },
   },
 };
