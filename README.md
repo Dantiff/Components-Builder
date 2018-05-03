@@ -39,7 +39,7 @@ some of the chart examples covered in the app include:
         #### Force Directed Node Focus
         ##### Example
         Sample code for a complete component with sample data is given at
-        **_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/forceDirectedD3Chart.vue)_**
+        **_[forceDirectedD3Chart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/forceDirectedD3Chart.vue)_**
         
 
 <a name="highcharts"></a>
