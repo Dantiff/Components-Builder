@@ -5,6 +5,13 @@
       return {
         charts: [
           {
+            title: 'D3 Charts',
+            text: 'A es6-based implementation of D3 Charts',
+            charts: [
+              { link: { name: 'charts.d3.forceDirected' }, title: 'D3 Charts: Force Directed Node Focus' },
+            ],
+          },
+          {
             title: 'Highcharts',
             text: 'A es6-based implementation of highcharts',
             charts: [

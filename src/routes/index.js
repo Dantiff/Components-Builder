@@ -66,6 +66,14 @@ export default [
     },
   },
   {
+    path: '/charts/d3/force-directed-node-focus',
+    name: 'charts.d3.forceDirected',
+    component: require('@/modules/charts/components/forceDirectedD3Chart.vue'),
+    meta: {
+      auth: true,
+    },
+  },
+  {
     path: '/charts/highcharts/multilinear',
     name: 'charts.highcharts.multilinear',
     component: require('@/modules/charts/components/multiLinearChart.vue'),

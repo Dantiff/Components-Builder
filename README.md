@@ -7,6 +7,8 @@ Table of Contents
 [**Material UI**](#material-ui)
 
 [**Charts**](#charts)
+* [**D3 Charts**](#d3Charts)
+  * [**Force Directed Node Focus**](#force-directed-node-focus)
 * [**Highcharts**](#highcharts)
   * [**MultiLinear Chart**](#multilinear-highcharts)
   * [**TimeSeries Chart**](#timeseries-highcharts)
@@ -27,6 +29,18 @@ In this setup, the app selects __[Vuetify](https://vuetifyjs.com/)__, a popular 
 ## Charts
 Since most of the advanced JavaScript chart packages and available tutorials and examples for the same conform to the es5 release of Javascript, this app takes an initiative to illustrate the usage of most popular and advance chart packages including **_chart.js_**, **_highcharts_**, and **_ndv3_** charts using the lastest es6 and es7 releases of JavaScript.
 some of the chart examples covered in the app include:
+
+<a name="d3Charts"></a>
+  *   <h3><a href="https://github.com/d3/d3/wiki">D3 Charts</a></h3>
+      
+      D3 (Data-Driven Documents or D3.js) is a JavaScript library for visualizing data using web standards. D3 helps you bring data to life using SVG, Canvas and HTML. D3 combines powerful visualization and interaction techniques with a data-driven approach to DOM manipulation, giving you the full capabilities of modern browsers and the freedom to design the right visual interface for your data. 
+
+      * 
+        #### Force Directed Node Focus
+        ##### Example
+        Sample code for a complete component with sample data is given at
+        **_[multiLinearChart.vue](https://github.com/Dantiff/Components-Builder/blob/master/src/modules/charts/components/forceDirectedD3Chart.vue)_**
+        
 
 <a name="highcharts"></a>
   *   <h3><a href="https://github.com/weizhenye/vue-highcharts">Highcharts</a></h3>
